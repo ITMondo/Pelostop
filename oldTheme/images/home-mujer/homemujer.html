@@ -1,0 +1,130 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Documento sin título</title>
+<style type="text/css">
+.animacion-mujer-home {
+	position:relative;
+	width:214px;
+	height:511px;
+	overflow:hidden;
+}
+.animacion-mujer-home img {
+	position:absolute;left:0px;top:0px;z-index:2;display:none;pointer-events:none;
+}
+.animacion-mujer-home img.base {
+	position:absolute;left:0px;top:0px;z-index:1;display:block;pointer-events:all;
+}
+
+
+
+</style>
+
+<script src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
+<script>
+
+$(function(){
+	
+	$("area").on('mouseenter',function(e){
+		e.preventDefault();
+		e.stopPropagation();
+		$(".zona").hide();
+		
+		var image = $(this).attr('alt');
+		if(image!=''){
+		$("."+image).show();
+		}
+	}).on('mouseleave',function(e){
+		var image = $(this).attr('alt');
+		if(image!=''){
+		$("."+image).hide();
+		}
+
+	});
+	
+});
+
+</script>
+
+
+</head>
+
+<body>
+
+<div class="animacion-mujer-home">
+<img class="base" src="homemujer.png" width="214" height="511" usemap="#m_homemujer" alt="" />
+<img class="zona pecho" src="pecho.png" />
+<img class="zona piernas-completas" src="piernas-completas.png" />
+<img class="zona medias-piernas-superiores" src="medias-piernas-superiores.png" />
+<img class="zona pies" src="pies.png" />
+<img class="zona medias-piernas-inferiores" src="medias-piernas-inferiores.png" />
+<img class="zona manos" src="manos.png" />
+<img class="zona linea-alba" src="linea-alba.png" />
+<img class="zona ingles-brasil" src="ingles-brasil.png" />
+<img class="zona ingles" src="ingles.png" />
+<img class="zona hombros" src="hombros.png" />
+<img class="zona brazos" src="brazos.png" />
+<img class="zona axilas" src="axilas.png" />
+<img class="zona areolas" src="axilas.png" />
+<img class="zona antebrazo-superior" src="antebrazo-superior.png" />
+<img class="zona antebrazo-inferior" src="antebrazo-inferior.png" />
+<img class="zona abdomen" src="abdomen.png" />
+<img class="zona patillas" src="patillas.png" />
+<img class="zona orejas" src="orejas.png" />
+<img class="zona nariz" src="nariz.png" />
+<img class="zona menton" src="menton.png" />
+<img class="zona mejillas" src="mejillas.png" />
+<img class="zona labio-superior" src="labio-superior.png" />
+<img class="zona entrecejo" src="entrecejo.png" />
+<img class="zona cara" src="cara.png" />
+<img class="zona cuello" src="cuello.png" />
+<img class="zona barbilla" src="barbilla.png" />
+<img class="zona facial-inferior" src="facial-inferior.png" />
+<map name="m_homemujer" id="m_homemujer">
+<area shape="poly" coords="70,169,110,168,144,169,142,178,142,187,145,204,149,213,152,220,152,224,126,224,88,225,70,225,63,224,65,210,71,197,71,189,71,180,70,172,70,169" href="javascript:;" title="abdomen" alt="abdomen" />
+<area shape="poly" coords="156,184,162,185,169,181,173,178,191,230,197,244,200,257,190,259,187,257,179,243,167,230,158,216,156,201,154,190,156,184" href="javascript:;" title="antebrazo_inferior" alt="antebrazo-inferior" />
+<area shape="poly" coords="41,178,50,184,58,185,61,185,61,196,59,211,46,229,37,240,31,252,28,257,22,258,16,255,30,205,35,191,41,178" href="javascript:;" title="antebrazo_inferior" alt="antebrazo-inferior" />
+<area shape="poly" coords="151,124,163,123,169,121,170,162,173,175,173,181,159,184,152,181,148,159,152,151,151,141,151,124" href="javascript:;" title="antebrazo_superior" alt="antebrazo-superior" />
+<area shape="poly" coords="44,123,56,126,63,125,65,137,65,162,62,187,50,185,41,176,44,123" href="javascript:;" title="antebrazo_superior" alt="antebrazo-superior" />
+<area shape="poly" coords="137,144,133,149,137,153,141,151,142,145,139,143" href="javascript:;" title="areolas" alt="areolas" />
+<area shape="poly" coords="78,143,74,143,73,148,76,151,82,150,82,145,78,143" href="javascript:;" title="areolas" alt="areolas" />
+<area shape="poly" coords="63,127,63,134,64,145,67,146,66,131,63,127" href="javascript:;" title="axilas" alt="axilas" />
+<area shape="poly" coords="151,124,148,133,148,143,151,147,154,132,151,124" href="javascript:;" alt="axilas" />
+<area shape="poly" coords="151,124,161,123,166,121,168,121,172,175,179,193,185,213,192,234,197,247,201,267,203,276,203,288,200,299,196,301,191,300,185,293,183,289,187,281,187,267,184,259,184,252,178,243,156,206,152,195,149,170,148,161,151,155,149,140,151,124" href="javascript:;" title="brazos" alt="brazos" />
+<area shape="poly" coords="43,122,59,127,64,126,66,155,66,166,63,192,51,220,42,236,31,251,29,264,26,284,32,291,22,305,12,298,10,273,18,244,26,217,33,197,37,182,43,171,43,122" href="javascript:;" title="brazos" alt="brazos" />
+<area shape="poly" coords="70,243,84,250,97,259,105,265,110,264,115,260,145,241,143,236,120,252,114,256,109,260,121,239,94,240,105,261,95,251,87,245,82,241,74,237,72,237,70,243" href="javascript:;" title="intima_completa" alt="intima-completa" />
+<area shape="poly" coords="64,93,57,95,48,101,46,108,50,111,59,112,66,111,73,106,74,101,74,97,64,93" href="javascript:;" title="hombros" alt="hombros" />
+<area shape="poly" coords="150,93,140,94,136,101,141,110,153,113,164,111,166,105,163,98,150,93" href="javascript:;" title="hombros" alt="hombros" />
+<area shape="poly" coords="70,236,68,243,83,249,96,258,103,263,105,266,119,256,137,245,144,242,142,236,131,243,117,251,111,259,105,263,96,253,84,243,75,238,70,236" href="javascript:;" title="ingles" alt="ingles" />
+<area shape="poly" coords="70,245,82,250,96,259,105,266,102,255,101,248,112,250,108,264,107,267,116,260,145,244,144,238,119,253,122,240,120,238,93,237,94,254,85,246,77,241,71,238,70,245" href="javascript:;" title="" alt="ingles-brasil" />
+<area shape="poly" coords="105,212,105,230,106,248,110,248,112,238,111,222,110,213,105,212" href="javascript:;" title="linea_alba" alt="linea-alba" />
+<area shape="poly" coords="185,256,186,266,187,270,189,276,189,282,184,291,189,300,199,300,203,292,204,279,203,264,200,256,196,255,185,256" href="javascript:;" title="manos" alt="manos" />
+<area shape="poly" coords="15,257,26,257,29,262,27,272,28,282,32,291,24,302,14,302,9,289,12,267,15,257" href="javascript:;" title="manos" alt="manos" />
+<area shape="poly" coords="69,341,85,344,102,342,118,344,135,346,145,342,146,389,141,425,133,470,116,470,112,418,111,389,112,371,99,368,99,379,102,402,94,437,95,462,92,470,78,470,67,410,70,370,68,353,69,341" href="javascript:;" alt="medias-piernas-inferiores" />
+<area shape="poly" coords="56,263,87,263,157,263,154,298,149,316,144,343,141,368,127,372,113,369,108,349,108,327,109,305,108,298,102,300,102,307,102,329,104,344,101,359,98,368,90,372,82,372,71,367,68,352,67,326,60,312,56,288,56,263" href="javascript:;" title="medias piernas superiores" alt="medias-piernas-superiores" />
+<area shape="poly" coords="69,90,61,94,63,106,63,114,64,125,65,139,64,155,66,163,73,165,86,166,118,167,142,166,151,160,151,143,150,129,150,106,152,96,143,90,69,90" href="javascript:;" title="pecho" alt="pecho" />
+<area shape="poly" coords="57,264,85,263,157,263,157,285,154,297,150,314,146,331,144,349,144,360,143,382,141,410,137,425,136,445,133,462,132,469,117,470,117,459,117,445,117,434,113,418,112,408,111,389,112,376,111,369,111,361,110,356,110,351,109,343,110,339,110,333,110,313,108,300,107,288,105,293,101,304,101,319,103,338,103,348,103,354,98,364,97,374,97,385,100,395,101,403,101,405,100,411,100,422,92,470,78,470,71,419,67,389,72,364,68,342,62,318,59,298,56,276,57,265"  title="piernas-completas" alt="piernas-completas" />
+<area shape="poly" coords="117,470,123,470,129,469,132,469,137,482,141,486,144,492,144,496,141,500,140,503,136,504,130,504,127,504,126,504,123,504,118,500,117,494,118,487,117,483,116,481,116,478,117,470" href="javascript:;" title="pies" alt="pies" />
+<area shape="poly" coords="77,471,77,475,74,481,70,490,69,495,70,501,75,503,85,505,90,506,95,502,96,497,96,489,95,485,93,476,92,471,77,471" href="javascript:;" title="pies" alt="pies" />
+<area shape="poly" coords="90,55,87,57,88,60,90,65,92,66,93,64,92,61,90,55" href="javascript:;" title="patillas" alt="patillas" />
+<area shape="poly" coords="124,55,123,61,122,64,125,66,126,62,127,58,126,56,124,55" href="javascript:;" title="patillas" alt="patillas" />
+<area shape="poly" coords="86,43,83,44,80,45,79,46,78,50,79,54,81,57,88,59,88,58,84,53,83,46,86,43" href="javascript:;" title="orejas" alt="orejas" />
+<area shape="poly" coords="129,45,131,46,131,49,130,54,128,57,127,59,132,59,135,57,136,53,136,48,135,46,132,43,129,43,129,45" href="javascript:;" title="orejas" alt="orejas" />
+<area shape="poly" coords="105,40,103,52,103,54,109,54,110,51,108,43,107,39,105,40" href="javascript:;" title="nariz" alt="nariz" />
+<area shape="poly" coords="104,67,101,73,103,76,109,76,113,75,114,73,113,68,111,67,104,67" href="javascript:;" title="menton" alt="menton" />
+<area shape="poly" coords="110,46,112,54,112,57,115,56,121,53,125,52,126,48,125,44,119,45,113,46,110,46" href="javascript:;" title="mejillas" alt="mejillas" />
+<area shape="poly" coords="87,44,87,52,90,53,97,56,101,57,103,48,104,45,100,46,95,47,91,45,87,44" href="javascript:;" title="mejillas" alt="mejillas" />
+<area shape="poly" coords="99,63,97,61,99,58,103,56,107,55,113,57,116,59,117,61,114,61,110,59,104,59,101,61,99,63" href="javascript:;" title="labios superiores" alt="labio-superior" />
+<area shape="poly" coords="103,36,103,40,112,40,112,37,103,36" href="javascript:;" title="entrecejo" alt="entrecejo" />
+<area shape="poly" coords="104,52,104,47,105,40,104,40,103,36,111,35,112,39,109,41,109,49,110,53,104,52" href="javascript:;" title="cara" alt="cara" />
+<area shape="poly" coords="88,54,92,65,95,72,100,75,105,77,112,75,115,74,121,70,124,63,127,58,127,54,122,57,120,58,114,58,109,56,104,57,101,58,99,59,95,59,92,57,88,54" href="javascript:;" title="cara" alt="cara" />
+<area shape="poly" coords="91,68,91,78,99,81,107,83,114,82,120,80,121,76,122,69,115,74,109,77,102,75,96,72,92,69" href="javascript:;" title="cuello" alt="cuello" />
+<area shape="poly" coords="88,53,93,69,96,72,98,70,101,68,108,68,113,68,117,69,119,72,122,65,126,59,127,53,122,57,115,58,110,57,105,57,100,59,96,60,92,58,88,53" href="javascript:;" title="Facial Inferior" alt="facial-inferior" />
+<area shape="poly" coords="108,68,104,68,99,70,97,73,101,75,106,76,112,76,117,74,117,71,114,68,108,68" href="javascript:;" title="barbilla" alt="barbilla" />
+</map>
+</div>
+
+
+</body>
+</html>

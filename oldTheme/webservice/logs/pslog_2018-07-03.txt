@@ -1,0 +1,2 @@
+[2018-07-03 21:36:32.000000 193.105.253.254 193.105.253.254 - buscaClienteNIF ] {"user":"optimast","pass":"StOptima2017","nif":"Y3654747S","nombre":"Stefanie","apellidos":"Kaufmann","email":"stefanie_kaufmann@gmx.at","comoconocio":"68","iddelegacion":"153","CP":"","tlf":"0034678175447","sexo":""}
+[2018-07-03 21:36:32.000000 193.105.253.254 193.105.253.254 - altaCompra ] {"user":"optimast","pass":"StOptima2017","id_cliente":"1000284830","id_articulo":"2409","unidades":1,"centro":"153","forma_pago":"13","tipo_descuento":"1","descuento_unitario":0,"tipoid":"1"}
