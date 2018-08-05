@@ -1,0 +1,4 @@
+[2018-07-24 11:06:10.000000 193.105.253.254 193.105.253.254 - buscaClienteNIF ] {"user":"optimast","pass":"StOptima2017","nif":"47998177y","nombre":"Maria","apellidos":"Poch","email":"Mariapochs@gmail.com","comoconocio":"4","iddelegacion":"152","CP":"","tlf":"662519-71","sexo":""}
+[2018-07-24 11:06:10.000000 193.105.253.254 193.105.253.254 - altaCompra ] {"user":"optimast","pass":"StOptima2017","id_cliente":"1000233103","id_articulo":"1583","unidades":1,"centro":"152","forma_pago":"13","tipo_descuento":"1","descuento_unitario":0,"tipoid":"1"}
+[2018-07-24 11:06:11.000000 193.105.253.254 193.105.253.254 - detalleVenta ] {"user":"optimast","pass":"StOptima2017","idVenta":"161659319","noperacion":14857,"ip":"193.105.253.254","ccupon":""}
+[2018-07-24 11:06:11.000000 193.105.253.254 193.105.253.254 - encuestaVenta ] {"user":"optimast","pass":"StOptima2017","idVenta":"161659319","CCNP":"4"}

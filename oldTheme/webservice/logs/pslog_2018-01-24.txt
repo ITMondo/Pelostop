@@ -1,0 +1,9 @@
+[2018-01-24 14:15:21.000000 193.105.253.250 193.105.253.250 - altaCompra ] {"user":"optimast","pass":"StOptima2017","id_cliente":"1000343543","id_articulo":"2368","unidades":1,"centro":"101","forma_pago":"13","tipo_descuento":"1","descuento_unitario":0,"tipoid":"1"}
+[2018-01-24 14:15:22.000000 193.105.253.250 193.105.253.250 - detalleVenta ] {"user":"optimast","pass":"StOptima2017","idVenta":"161312787","noperacion":9950,"ip":"193.105.253.250","ccupon":""}
+[2018-01-24 14:15:23.000000 193.105.253.250 193.105.253.250 - encuestaVenta ] {"user":"optimast","pass":"StOptima2017","idVenta":"161312787","CCNP":"9"}
+[2018-01-24 16:19:11.000000 193.105.253.250 193.105.253.250 - altaCompra ] {"user":"optimast","pass":"StOptima2017","id_cliente":"31473","id_articulo":"2368","unidades":1,"centro":"124","forma_pago":"13","tipo_descuento":"1","descuento_unitario":0,"tipoid":"1"}
+[2018-01-24 16:19:14.000000 193.105.253.250 193.105.253.250 - detalleVenta ] {"user":"optimast","pass":"StOptima2017","idVenta":"161313197","noperacion":9952,"ip":"193.105.253.250","ccupon":""}
+[2018-01-24 16:19:15.000000 193.105.253.250 193.105.253.250 - encuestaVenta ] {"user":"optimast","pass":"StOptima2017","idVenta":"161313197","CCNP":"68"}
+[2018-01-24 18:57:57.000000 193.105.253.250 193.105.253.250 - altaCompra ] {"user":"optimast","pass":"StOptima2017","id_cliente":"1000343626","id_articulo":"493","unidades":1,"centro":"171","forma_pago":"13","tipo_descuento":"1","descuento_unitario":0,"tipoid":"0"}
+[2018-01-24 18:57:59.000000 193.105.253.250 193.105.253.250 - detalleVenta ] {"user":"optimast","pass":"StOptima2017","idVenta":"161313931","noperacion":9954,"ip":"193.105.253.250","ccupon":""}
+[2018-01-24 18:57:59.000000 193.105.253.250 193.105.253.250 - encuestaVenta ] {"user":"optimast","pass":"StOptima2017","idVenta":"161313931","CCNP":"56"}
