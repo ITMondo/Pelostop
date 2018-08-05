@@ -9,6 +9,7 @@
 - `sudo apachectl restart`
 - `brew services start mysql`
 - `mysql -u root -p`
+- (php version 7.1.16 wants a caching_sha2_password, fixed with: ALTER USER 'username'@'ip_address' IDENTIFIED WITH mysql_native_password BY 'password';)
 
 # Wordpress
 username: dirk
