@@ -121,3 +121,77 @@ function save_giftcard_option_fields( $post_id ) {
 }
 add_action( 'woocommerce_process_product_meta_simple', 'save_giftcard_option_fields'  );
 add_action( 'woocommerce_process_product_meta_variable', 'save_giftcard_option_fields'  );
+
+
+/**
+   Center Post Type
+ */
+// var_dump(get_posts(array('post_type' => 'center')));
+
+function create_post_type() {
+  register_post_type( 'center',
+                      array(
+                          'labels' => array(
+                              'name' => __( 'Centers' ),
+                              'singular_name' => __( 'Center' )
+                                            ),
+                          'public' => true,
+                          'has_archive' => true,
+                          'supports' => array('title')
+                            )
+                      );
+}
+add_action( 'init', 'create_post_type' );
+
+$arr_centros = array(
+	array('id'=>'centro_id','nombre'=>'Centro ID'),
+	array('id'=>'nombre_web','nombre'=>'Nombre Web'),
+	array('id'=>'calle','nombre'=>'Calle'),
+	array('id'=>'numero','nombre'=>'Número'),
+	array('id'=>'puerta','nombre'=>'Puerta'),
+	array('id'=>'cp','nombre'=>'Código Postal'),
+	array('id'=>'poblacion','nombre'=>'Población'),
+	array('id'=>'provincia','nombre'=>'Provincia'),
+	array('id'=>'telefono','nombre'=>'Teléfono'),
+	array('id'=>'email','nombre'=>'Email'),
+	array('id'=>'horarios','nombre'=>'Horarios'),
+	array('id'=>'latitud','nombre'=>'Latitud'),
+	array('id'=>'longitud','nombre'=>'Longitud'),
+	array('id'=>'empresa','nombre'=>'Grupo/Empresa'),
+	array('id'=>'venta_paypal','nombre'=>'Paypal Disponible'),
+	array('id'=>'venta_addons','nombre'=>'Addons Disponible'),
+	array('id'=>'venta_redsys','nombre'=>'Redsys Disponible'),
+                     );
+function centros_register_meta_fields() {
+  global $arr_centros;
+  foreach($arr_centros as $centro){
+    register_meta('post',$centro['id'],'sanitize_text_field');
+  }
+}
+add_action('init', 'centros_register_meta_fields');
+
+function centers_meta_boxes() {
+  add_meta_box('centers-meta-box', 'Datos del Centro', 'centers_meta_box_callback', 'center', 'normal','high');
+}
+add_action('add_meta_boxes', 'centers_meta_boxes' );
+
+function centers_meta_box_callback($post){
+  global $wpdb, $post, $arr_centros;
+  foreach($arr_centros as $centro){
+    print '<p><label class="label">'.$centro['nombre'].'</label><br/>';
+    print '<input name="'.$centro['id'].'" id="'.$centro['id'].'" type="text" value="'.htmlspecialchars(get_post_meta($post->ID, $centro['id'], true)).'"></p>';
+  }
+}
+
+function save_center() {
+  global $wpdb, $post, $arr_centros;
+  $post_id = $_POST['post_ID'];
+  if (!$post_id) return $post;
+
+
+  foreach($arr_centros as $centro){
+    update_post_meta($post_id, $centro['id'], $_REQUEST[$centro['id']]);
+  }
+}
+add_action('save_post', 'save_center');
+add_action('publish_post', 'save_center');
