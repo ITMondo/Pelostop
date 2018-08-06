@@ -68,10 +68,10 @@ if ( version_compare( get_bloginfo( 'version' ), '4.7.3', '>=' ) && ( is_admin()
  * Add a custom product tab.
  */
 function custom_product_tabs( $tabs) {
-	$tabs['giftcard'] = array(
-		'label'		=> __( 'Gift Card', 'woocommerce' ),
-		'target'	=> 'giftcard_options',
-		'class'		=> array( 'show_if_simple', 'show_if_variable'  ),
+	$tabs['centers'] = array(
+		'label'		=> __( 'Centers', 'woocommerce' ),
+		'target'	=> 'centers_options',
+		//'class'		=> array( 'show_if_simple', 'show_if_variable'  ),
 	);
 	return $tabs;
 }
@@ -81,9 +81,9 @@ add_filter( 'woocommerce_product_data_tabs', 'custom_product_tabs' );
  */
 function giftcard_options_product_tab_content() {
 	global $post;
-	
+
 	// Note the 'id' attribute needs to match the 'target' parameter set above
-	?><div id='giftcard_options' class='panel woocommerce_options_panel'><?php
+	?><div id='centers_options' class='panel woocommerce_options_panel'><?php
 		?><div class='options_group'><?php
 			woocommerce_wp_checkbox( array(
 				'id' 		=> '_allow_personal_message',
@@ -110,14 +110,14 @@ add_filter( 'woocommerce_product_data_panels', 'giftcard_options_product_tab_con
  * Save the custom fields.
  */
 function save_giftcard_option_fields( $post_id ) {
-	
+
 	$allow_personal_message = isset( $_POST['_allow_personal_message'] ) ? 'yes' : 'no';
 	update_post_meta( $post_id, '_allow_personal_message', $allow_personal_message );
-	
+
 	if ( isset( $_POST['_valid_for_days'] ) ) :
 		update_post_meta( $post_id, '_valid_for_days', absint( $_POST['_valid_for_days'] ) );
 	endif;
-	
+
 }
 add_action( 'woocommerce_process_product_meta_simple', 'save_giftcard_option_fields'  );
 add_action( 'woocommerce_process_product_meta_variable', 'save_giftcard_option_fields'  );
