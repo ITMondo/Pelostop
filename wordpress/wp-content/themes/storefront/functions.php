@@ -128,6 +128,8 @@ add_action( 'woocommerce_process_product_meta_variable', 'save_giftcard_option_f
  */
 // var_dump(get_posts(array('post_type' => 'center')));
 
+
+
 function create_post_type() {
   register_post_type( 'center',
                       array(
