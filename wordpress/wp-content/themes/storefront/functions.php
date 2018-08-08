@@ -119,7 +119,7 @@ add_filter( 'woocommerce_product_data_panels', 'giftcard_options_product_tab_con
  */
 function save_giftcard_option_fields( $post_id ) {
 	dump($_POST);
-	exit();
+    exit();
 	// $allow_personal_message = isset( $_POST['_allow_personal_message'] ) ? 'yes' : 'no';
 	// update_post_meta( $post_id, '_allow_personal_message', $allow_personal_message );
   //
