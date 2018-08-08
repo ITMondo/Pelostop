@@ -90,6 +90,7 @@ function giftcard_options_product_tab_content() {
 
     //dump($centers);
     foreach ($centers as $center) {
+			dump($post);
       $id = $center->ID;
       $title = $center->post_title;
       woocommerce_wp_checkbox( array(
@@ -118,8 +119,19 @@ add_filter( 'woocommerce_product_data_panels', 'giftcard_options_product_tab_con
  * Save the custom fields.
  */
 function save_giftcard_option_fields( $post_id ) {
-	dump($_POST);
-	exit();
+	$selected_centers = array_filter($_POST, function($key) {
+    return strpos($key, 'center_') === 0;
+}, ARRAY_FILTER_USE_KEY);
+dump($selected_centers);
+
+	$centers_str = array_reduce(array_keys($selected_centers), function($carry, $item){
+		$id = substr($item, 7);
+		return "$carry|$id";
+	});
+	$centers_str = substr($centers_str, 1);
+	echo $centers_str;
+	update_post_meta($post_id, "centers", $centers_str);
+
 	// $allow_personal_message = isset( $_POST['_allow_personal_message'] ) ? 'yes' : 'no';
 	// update_post_meta( $post_id, '_allow_personal_message', $allow_personal_message );
   //
