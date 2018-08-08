@@ -82,24 +82,32 @@ add_filter( 'woocommerce_product_data_tabs', 'custom_product_tabs' );
 function giftcard_options_product_tab_content() {
 	global $post;
 
+    $centers = get_posts(array('post_type' => 'center'));
+
 	// Note the 'id' attribute needs to match the 'target' parameter set above
 	?><div id='centers_options' class='panel woocommerce_options_panel'><?php
 		?><div class='options_group'><?php
-			woocommerce_wp_checkbox( array(
-				'id' 		=> '_allow_personal_message',
-				'label' 	=> __( 'Allow the customer to add a personal message', 'woocommerce' ),
-			) );
-			woocommerce_wp_text_input( array(
-				'id'				=> '_valid_for_days',
-				'label'				=> __( 'Gift card validity (in days)', 'woocommerce' ),
-				'desc_tip'			=> 'true',
-				'description'		=> __( 'Enter the number of days the gift card is valid for.', 'woocommerce' ),
-				'type' 				=> 'number',
-				'custom_attributes'	=> array(
-					'min'	=> '1',
-					'step'	=> '1',
-				),
-			) );
+
+              dump($centers);
+    foreach ($centers as $center) {
+      $id = $center->ID;
+      $title = $center->post_title;
+      woocommerce_wp_checkbox( array(
+          'id' 		=> '_allow_personal_message',
+          'label' 	=> __( 'Allow the customer to add a personal message', 'woocommerce' ),
+                                     ) );
+    }
+			// woocommerce_wp_text_input( array(
+			// 	'id'				=> '_valid_for_days',
+			// 	'label'				=> __( 'Gift card validity (in days)', 'woocommerce' ),
+			// 	'desc_tip'			=> 'true',
+			// 	'description'		=> __( 'Enter the number of days the gift card is valid for.', 'woocommerce' ),
+			// 	'type' 				=> 'number',
+			// 	'custom_attributes'	=> array(
+			// 		'min'	=> '1',
+			// 		'step'	=> '1',
+			// 	),
+			// ) );
 		?></div>
 
 	</div><?php
@@ -127,7 +135,6 @@ add_action( 'woocommerce_process_product_meta_variable', 'save_giftcard_option_f
    Center Post Type
  */
 // var_dump(get_posts(array('post_type' => 'center')));
-
 
 
 function create_post_type() {
@@ -209,3 +216,11 @@ function my_custom_action() {
 };
 add_action( 'woocommerce_single_product_summary', 'my_custom_action', 30 );
 
+
+// Helpers
+function dump($var) {
+
+  echo "<div><pre>";
+  var_dump($var);
+  echo "</pre></div>";
+}
