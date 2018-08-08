@@ -110,24 +110,9 @@ function create_post_type() {
 add_action( 'init', 'create_post_type' );
 
 $arr_centros = array(
-	array('id'=>'centro_id','nombre'=>'Centro ID'),
-	array('id'=>'nombre_web','nombre'=>'Nombre Web'),
-	array('id'=>'calle','nombre'=>'Calle'),
-	array('id'=>'numero','nombre'=>'Número'),
-	array('id'=>'puerta','nombre'=>'Puerta'),
-	array('id'=>'cp','nombre'=>'Código Postal'),
-	array('id'=>'poblacion','nombre'=>'Población'),
-	array('id'=>'provincia','nombre'=>'Provincia'),
-	array('id'=>'telefono','nombre'=>'Teléfono'),
-	array('id'=>'email','nombre'=>'Email'),
-	array('id'=>'horarios','nombre'=>'Horarios'),
-	array('id'=>'latitud','nombre'=>'Latitud'),
-	array('id'=>'longitud','nombre'=>'Longitud'),
-	array('id'=>'empresa','nombre'=>'Grupo/Empresa'),
-	array('id'=>'venta_paypal','nombre'=>'Paypal Disponible'),
-	array('id'=>'venta_addons','nombre'=>'Addons Disponible'),
-	array('id'=>'venta_redsys','nombre'=>'Redsys Disponible'),
-                     );
+	array('id'=>'latitude','nombre'=>'Latitud'),
+	array('id'=>'longitude','nombre'=>'Longitud'),
+);
 function centros_register_meta_fields() {
   global $arr_centros;
   foreach($arr_centros as $centro){
@@ -167,6 +152,27 @@ remove_action( 'woocommerce_after_shop_loop_item', 'woocommerce_template_loop_ad
 remove_action( 'woocommerce_single_product_summary', 'woocommerce_template_single_add_to_cart', 30);
 
 function my_custom_action() {
+  global $product;
+  global $wpdb;
+  $product_id = $product->get_id();
+  $querystr = "
+    SELECT SUBSTRING(meta_key, 8)
+    FROM $wpdb->postmeta
+    WHERE post_id = $product_id AND meta_value = 'yes' AND meta_key LIKE 'center_%'
+  ";
+  $center_ids = $wpdb->get_results($querystr, ARRAY_N);
+
+
+  $centers = array();
+  foreach ($center_ids as $id) {
+    $center = get_post_meta($id[0]);
+    $xCenter = array(
+      'longitude' => $center['longitude'],
+      'latidude' => $center['latitude']
+    );
+    array_push($centers, $xCenter);
+  }
+  $centers_json = json_encode($centers);
   ?>
   <!-- Button trigger modal -->
   <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
@@ -186,12 +192,23 @@ function my_custom_action() {
         <div class="modal-body">
           <div id="map" style="width: 100%; height: 70vh;"></div>
           <script>
-            var map;
             function initMap() {
-              map = new google.maps.Map(document.getElementById('map'), {
-                center: {lat: -34.397, lng: 150.644},
-                zoom: 8
-              });
+              var centers = <?php echo $centers_json . ";"; ?>
+              var map = new google.maps.Map(
+                  document.getElementById('map'), {zoom: 14, center: { lat: 41.390205, lng: 2.154007 }}
+              );
+              var infowindow = new google.maps.InfoWindow()
+              for ( center of centers ) {
+                const position = { lat: parseFloat(center.latidude), lng: parseFloat(center.longitude) };
+                const content = '<a href="localhost?add-to-cart=<?php echo "$product_id\""; ?>>Add to cart</a>';
+                const marker = new google.maps.Marker({ position, map: map, title: "Hello" });
+                google.maps.event.addListener(marker,'click', (function(marker,content,infowindow){
+                  return function() {
+                    infowindow.setContent(content);
+                    infowindow.open(map,marker);
+                  };
+                })(marker,content,infowindow));
+              }
             }
           </script>
         </div>

@@ -8,3 +8,32 @@ Stack trace:
 #5 /Users/knowledge/Developer/Pelostop2/wordpress/wp-admin/includes/template.php(1073): WC_Meta_Box_Product_Data::output(Object(WP_Post), Array)
 #6 /
 
+2018-08-08T15:22:21+00:00 CRITICAL Uncaught ArgumentCountError: Too few arguments to function my_custom_action(), 1 passed in /Users/knowledge/Developer/Pelostop2/wordpress/wp-includes/class-wp-hook.php on line 286 and exactly 2 expected in /Users/knowledge/Developer/Pelostop2/wordpress/wp-content/themes/dt-the7/functions.php:169
+Stack trace:
+#0 /Users/knowledge/Developer/Pelostop2/wordpress/wp-includes/class-wp-hook.php(286): my_custom_action('')
+#1 /Users/knowledge/Developer/Pelostop2/wordpress/wp-includes/class-wp-hook.php(310): WP_Hook->apply_filters(NULL, Array)
+#2 /Users/knowledge/Developer/Pelostop2/wordpress/wp-includes/plugin.php(453): WP_Hook->do_action(Array)
+#3 /Users/knowledge/Developer/Pelostop2/wordpress/wp-content/plugins/woocommerce/templates/content-single-product.php(58): do_action('woocommerce_sin...')
+#4 /Users/knowledge/Developer/Pelostop2/wordpress/wp-includes/template.php(690): require('/Users/knowledg...')
+#5 /Users/knowledge/Developer/Pelostop2/wordpress/wp-content/plugins/woocommerce/includes/wc-core-functions.php(17
+
+2018-08-08T15:26:50+00:00 CRITICAL Uncaught Error: Call to a member function get_results() on null in /Users/knowledge/Developer/Pelostop2/wordpress/wp-content/themes/dt-the7/functions.php:177
+Stack trace:
+#0 /Users/knowledge/Developer/Pelostop2/wordpress/wp-includes/class-wp-hook.php(286): my_custom_action('')
+#1 /Users/knowledge/Developer/Pelostop2/wordpress/wp-includes/class-wp-hook.php(310): WP_Hook->apply_filters(NULL, Array)
+#2 /Users/knowledge/Developer/Pelostop2/wordpress/wp-includes/plugin.php(453): WP_Hook->do_action(Array)
+#3 /Users/knowledge/Developer/Pelostop2/wordpress/wp-content/plugins/woocommerce/templates/content-single-product.php(58): do_action('woocommerce_sin...')
+#4 /Users/knowledge/Developer/Pelostop2/wordpress/wp-includes/template.php(690): require('/Users/knowledg...')
+#5 /Users/knowledge/Developer/Pelostop2/wordpress/wp-content/plugins/woocommerce/includes/wc-core-functions.php(179): load_template('/Users/knowledg...', false)
+#6 /Users/knowledge/Developer/Pelostop2/wordpress/wp-content/plugins/woocommerce/templates/s
+
+2018-08-08T15:27:03+00:00 CRITICAL Uncaught Error: Call to a member function get_results() on null in /Users/knowledge/Developer/Pelostop2/wordpress/wp-content/themes/dt-the7/functions.php:178
+Stack trace:
+#0 /Users/knowledge/Developer/Pelostop2/wordpress/wp-includes/class-wp-hook.php(286): my_custom_action('')
+#1 /Users/knowledge/Developer/Pelostop2/wordpress/wp-includes/class-wp-hook.php(310): WP_Hook->apply_filters(NULL, Array)
+#2 /Users/knowledge/Developer/Pelostop2/wordpress/wp-includes/plugin.php(453): WP_Hook->do_action(Array)
+#3 /Users/knowledge/Developer/Pelostop2/wordpress/wp-content/plugins/woocommerce/templates/content-single-product.php(58): do_action('woocommerce_sin...')
+#4 /Users/knowledge/Developer/Pelostop2/wordpress/wp-includes/template.php(690): require('/Users/knowledg...')
+#5 /Users/knowledge/Developer/Pelostop2/wordpress/wp-content/plugins/woocommerce/includes/wc-core-functions.php(179): load_template('/Users/knowledg...', false)
+#6 /Users/knowledge/Developer/Pelostop2/wordpress/wp-content/plugins/woocommerce/templates/s
+
