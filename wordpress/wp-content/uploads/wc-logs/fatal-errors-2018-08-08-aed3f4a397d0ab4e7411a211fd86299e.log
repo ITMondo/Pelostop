@@ -1,0 +1,10 @@
+2018-08-08T08:26:47+00:00 CRITICAL Uncaught Error: Cannot use object of type WP_Post as array in /Users/knowledge/Developer/Pelostop2/wordpress/wp-content/themes/storefront/functions.php:88
+Stack trace:
+#0 /Users/knowledge/Developer/Pelostop2/wordpress/wp-includes/class-wp-hook.php(286): giftcard_options_product_tab_content('')
+#1 /Users/knowledge/Developer/Pelostop2/wordpress/wp-includes/class-wp-hook.php(310): WP_Hook->apply_filters('', Array)
+#2 /Users/knowledge/Developer/Pelostop2/wordpress/wp-includes/plugin.php(453): WP_Hook->do_action(Array)
+#3 /Users/knowledge/Developer/Pelostop2/wordpress/wp-content/plugins/woocommerce/includes/admin/meta-boxes/views/html-product-data-panel.php(46): do_action('woocommerce_pro...')
+#4 /Users/knowledge/Developer/Pelostop2/wordpress/wp-content/plugins/woocommerce/includes/admin/meta-boxes/class-wc-meta-box-product-data.php(35): include('/Users/knowledg...')
+#5 /Users/knowledge/Developer/Pelostop2/wordpress/wp-admin/includes/template.php(1073): WC_Meta_Box_Product_Data::output(Object(WP_Post), Array)
+#6 /
+
