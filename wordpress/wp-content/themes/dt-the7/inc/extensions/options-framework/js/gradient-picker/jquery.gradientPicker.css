@@ -1,0 +1,73 @@
+.gradientPicker-preview {
+	border: 1px solid rgba(0,0,0,0.2);
+}
+
+.gradientPicker-ctrlPt {
+	width: 8px;
+	height: 8px;
+	border: 2px solid gray;
+	position: absolute;
+	display: inline-block;
+}
+
+.gradientPicker-ctrlPts {
+	position: relative;
+	height: 10px;
+	width: 100%;
+}
+
+.gradientPicker-ptConfig {
+	position: absolute;
+	z-index: 9999;
+	margin-top: 12px;
+	background-color: white;
+	background: #fff;
+	border: 1px solid #dfdfdf;
+	padding: 0;
+}
+
+.gradientPicker-close {
+	position: absolute;
+	top: -4px;
+	right: -4px;
+	width: 16px;
+	height: 16px;
+	background-image: url("circle_remove.png");
+}
+
+.gradientPicker-ctrlPointsLocked .gradientPicker-close {
+	display: none;
+}
+
+.gradientPicker-ptConfig .color-chooser {
+	float: left;
+}
+
+/* Alpha color picker styles */
+
+.gradientPicker-ptConfig .wp-color-result {
+	display: none;
+}
+
+.gradientPicker-ptConfig .alpha-color-picker-wrap {
+	box-shadow: 0 3px 5px rgba(0,0,0,0.2);
+}
+
+.gradientPicker-ptConfig .wp-picker-input-wrap.wp-picker-position {
+	display: inline-block;
+	vertical-align: middle;
+	float: right;
+	margin-right: 9px;
+}
+
+.gradientPicker-ptConfig .wp-picker-input-wrap.wp-picker-position label {
+	vertical-align: middle;
+}
+
+.gradientPicker-ptConfig .point-position {
+	margin-right: 5px;
+}
+
+.gradientPicker-ptConfig .wp-picker-input-wrap {
+	margin: 6px 0 6px 9px;
+}
