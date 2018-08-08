@@ -81,34 +81,19 @@ add_filter( 'woocommerce_product_data_tabs', 'custom_product_tabs' );
  */
 function giftcard_options_product_tab_content() {
 	global $post;
-
     $centers = get_posts(array('post_type' => 'center'));
 
 	// Note the 'id' attribute needs to match the 'target' parameter set above
 	?><div id='centers_options' class='panel woocommerce_options_panel'><?php
 		?><div class='options_group'><?php
-
-    //dump($centers);
-    foreach ($centers as $center) {
-			dump($post);
-      $id = $center->ID;
-      $title = $center->post_title;
-      woocommerce_wp_checkbox( array(
-          'id' 		=> "center_$id",
-          'label' 	=> __( $title, 'woocommerce' ),
-                                     ) );
-    }
-			// woocommerce_wp_text_input( array(
-			// 	'id'				=> '_valid_for_days',
-			// 	'label'				=> __( 'Gift card validity (in days)', 'woocommerce' ),
-			// 	'desc_tip'			=> 'true',
-			// 	'description'		=> __( 'Enter the number of days the gift card is valid for.', 'woocommerce' ),
-			// 	'type' 				=> 'number',
-			// 	'custom_attributes'	=> array(
-			// 		'min'	=> '1',
-			// 		'step'	=> '1',
-			// 	),
-			// ) );
+              foreach ($centers as $center) {
+                $id = $center->ID;
+                $title = $center->post_title;
+                woocommerce_wp_checkbox( array(
+                    'id' 		=> "center_$id",
+                    'label' 	=> __( $title, 'woocommerce' ),
+                                               ) );
+              }
 		?></div>
 
 	</div><?php
@@ -119,26 +104,13 @@ add_filter( 'woocommerce_product_data_panels', 'giftcard_options_product_tab_con
  * Save the custom fields.
  */
 function save_giftcard_option_fields( $post_id ) {
-	$selected_centers = array_filter($_POST, function($key) {
-    return strpos($key, 'center_') === 0;
-}, ARRAY_FILTER_USE_KEY);
-dump($selected_centers);
-
-	$centers_str = array_reduce(array_keys($selected_centers), function($carry, $item){
-		$id = substr($item, 7);
-		return "$carry|$id";
-	});
-	$centers_str = substr($centers_str, 1);
-	echo $centers_str;
-	update_post_meta($post_id, "centers", $centers_str);
-
-	// $allow_personal_message = isset( $_POST['_allow_personal_message'] ) ? 'yes' : 'no';
-	// update_post_meta( $post_id, '_allow_personal_message', $allow_personal_message );
-  //
-	// if ( isset( $_POST['_valid_for_days'] ) ) :
-	// 	update_post_meta( $post_id, '_valid_for_days', absint( $_POST['_valid_for_days'] ) );
-	// endif;
-
+  $centers = get_posts(array('post_type' => 'center'));
+  foreach($centers as $center) {
+    $center_key = "center_" . $center->ID;
+	$has_center = isset( $_POST[$center_key] ) ? 'yes' : 'no';
+    echo $center->ID . " " . $has_center;
+	update_post_meta($post_id, $center_key, $has_center);
+  }
 }
 add_action( 'woocommerce_process_product_meta_simple', 'save_giftcard_option_fields'  );
 add_action( 'woocommerce_process_product_meta_variable', 'save_giftcard_option_fields'  );
