@@ -154,28 +154,41 @@ remove_action( 'woocommerce_single_product_summary', 'woocommerce_template_singl
 function my_custom_action() {
   global $product;
   global $wpdb;
+  $product_variation_ids = $product->get_children();
+  $variations_sql = substr(
+      array_reduce($product_variation_ids,
+                   function($carry, $item) {
+                     return $carry . " OR wp_posts.ID = " . $item;
+                   })
+      , 4);
   $product_id = $product->get_id();
   $querystr = "
-    SELECT ID
-    FROM $wpdb->posts
-    WHERE post_parent = $product_id AND post_status = 'publish'
+    SELECT wp_termmeta.meta_key, wp_termmeta.meta_value, wp_posts.ID
+    FROM wp_posts
+    LEFT JOIN wp_postmeta ON wp_postmeta.post_id = wp_posts.ID
+    LEFT JOIN wp_terms ON wp_terms.slug = wp_postmeta.meta_value
+    LEFT JOIN wp_termmeta ON wp_termmeta.term_id = wp_terms.term_id
+    WHERE wp_postmeta.meta_key = 'attribute_pa_centers' AND ($variations_sql)
   ";
-  $center_ids = $wpdb->get_results($querystr, ARRAY_N);
-  dump($center_ids);
+  $raw_centers = $wpdb->get_results($querystr, ARRAY_N);
 
-  $centers_json = "[]";
+  $centers = array();
+  foreach ($raw_centers as $center) {
+    if($center[0] === 'center_longitude') $longitude = $center[1];
+    if($center[0] === 'center_latitude') $latitude = $center[1];
 
-
-  // $centers = array();
-  // foreach ($center_ids as $id) {
-  //   $center = get_post_meta($id[0]);
-  //   $xCenter = array(
-  //     'longitude' => $center['longitude'],
-  //     'latidude' => $center['latitude']
-  //   );
-  //   array_push($centers, $xCenter);
-  // }
-  // $centers_json = json_encode($centers);
+    if (isset($longitude) && isset($latitude) ) {
+      $xCenter = array(
+          'longitude' => $longitude,
+          'latitude' => $latitude,
+          'variation_id' => $center[2]
+                       );
+      unset($latitude);
+      unset($longitude);
+      array_push($centers, $xCenter);
+    }
+  }
+  $centers_json = json_encode($centers);
   ?>
   <!-- Button trigger modal -->
   <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
@@ -197,13 +210,14 @@ function my_custom_action() {
           <script>
             function initMap() {
               var centers = <?php echo $centers_json . ";"; ?>
+              console.log(centers);
               var map = new google.maps.Map(
                   document.getElementById('map'), {zoom: 14, center: { lat: 41.390205, lng: 2.154007 }}
               );
               var infowindow = new google.maps.InfoWindow()
               for ( center of centers ) {
-                const position = { lat: parseFloat(center.latidude), lng: parseFloat(center.longitude) };
-                const content = '<a href="localhost?add-to-cart=<?php echo "$product_id\""; ?>>Add to cart</a>';
+                const position = { lat: parseFloat(center.latitude), lng: parseFloat(center.longitude) };
+                const content = '<a href="/?add-to-cart=<?php echo "$product_id"; ?>&variation_id='+center.variation_id+'">Add to cart</a>';
                 const marker = new google.maps.Marker({ position, map: map, title: "Hello" });
                 google.maps.event.addListener(marker,'click', (function(marker,content,infowindow){
                   return function() {
@@ -228,7 +242,7 @@ add_action( 'woocommerce_single_product_summary', 'my_custom_action', 30 );
 
 
 // CUSTOM WOOCOMMERCE TAXONOMY
-$center_fields = array('center_longitude' => 'Longitud', 'center_latidude' => 'Latitud');
+$center_fields = array('center_latitude' => 'Latitud', 'center_longitude' => 'Longitud');
 
 // REGISTER TERM META
 add_action( 'init', '___register_term_meta_text' );
@@ -245,18 +259,18 @@ function get_term_meta_value( $term_id, $meta_key ) {
 }
 
 // ADD FIELD TO CATEGORY TERM PAGE
-add_action( 'pa_centers_add_form_fields', '___add_form_field_term_meta_value' );
-function ___add_form_field_term_meta_text() { ?>
-    <?php wp_nonce_field( basename( __FILE__ ), 'term_meta_text_nonce' ); ?>
+add_action( 'pa_centers_add_form_fields', '___add_form_field_term_meta_text' );
+function ___add_form_field_term_meta_text() {
+  wp_nonce_field( basename( __FILE__ ), 'term_meta_text_nonce' );
+  global $center_fields;
+  foreach($center_fields as $field => $name) {
+    ?>
     <div class="form-field term-meta-text-wrap">
-        <label for="center_longitude"><?php _e( 'Longitud', 'text_domain' ); ?></label>
-        <input type="text" name="center_longitude" id="center_longitude" value="" />
+        <label for="<php echo $field; ?>"><?php _e( $name, 'text_domain' ); ?></label>
+        <input type="text" name="<?php echo $field; ?>" id="<php echo $field; ?>" value="" />
     </div>
-    <div class="form-field term-meta-text-wrap">
-        <label for="center_latitude"><?php _e( 'Latitud', 'text_domain' ); ?></label>
-        <input type="text" name="center_latitude" id="center_latitude" value="" />
-    </div>
-<?php }
+  <?php }
+}
 
 // ADD FIELD TO CATEGORY EDIT PAGE
 add_action( 'pa_centers_edit_form_fields', '___edit_form_field_term_meta_text' );
