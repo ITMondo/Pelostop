@@ -156,23 +156,26 @@ function my_custom_action() {
   global $wpdb;
   $product_id = $product->get_id();
   $querystr = "
-    SELECT SUBSTRING(meta_key, 8)
-    FROM $wpdb->postmeta
-    WHERE post_id = $product_id AND meta_value = 'yes' AND meta_key LIKE 'center_%'
+    SELECT ID
+    FROM $wpdb->posts
+    WHERE post_parent = $product_id AND post_status = 'publish'
   ";
   $center_ids = $wpdb->get_results($querystr, ARRAY_N);
+  dump($center_ids);
+
+  $centers_json = "[]";
 
 
-  $centers = array();
-  foreach ($center_ids as $id) {
-    $center = get_post_meta($id[0]);
-    $xCenter = array(
-      'longitude' => $center['longitude'],
-      'latidude' => $center['latitude']
-    );
-    array_push($centers, $xCenter);
-  }
-  $centers_json = json_encode($centers);
+  // $centers = array();
+  // foreach ($center_ids as $id) {
+  //   $center = get_post_meta($id[0]);
+  //   $xCenter = array(
+  //     'longitude' => $center['longitude'],
+  //     'latidude' => $center['latitude']
+  //   );
+  //   array_push($centers, $xCenter);
+  // }
+  // $centers_json = json_encode($centers);
   ?>
   <!-- Button trigger modal -->
   <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
@@ -222,6 +225,78 @@ function my_custom_action() {
   <?php
 };
 add_action( 'woocommerce_single_product_summary', 'my_custom_action', 30 );
+
+
+// CUSTOM WOOCOMMERCE TAXONOMY
+$center_fields = array('center_longitude' => 'Longitud', 'center_latidude' => 'Latitud');
+
+// REGISTER TERM META
+add_action( 'init', '___register_term_meta_text' );
+function ___register_term_meta_text() {
+    register_meta( 'term', '__term_meta_text', 'sanitize_text_field' );
+}
+
+
+// GETTER (will be sanitized)
+function get_term_meta_value( $term_id, $meta_key ) {
+  $value = get_term_meta( $term_id, $meta_key, true );
+  $value = sanitize_text_field( $value );
+  return $value;
+}
+
+// ADD FIELD TO CATEGORY TERM PAGE
+add_action( 'pa_centers_add_form_fields', '___add_form_field_term_meta_value' );
+function ___add_form_field_term_meta_text() { ?>
+    <?php wp_nonce_field( basename( __FILE__ ), 'term_meta_text_nonce' ); ?>
+    <div class="form-field term-meta-text-wrap">
+        <label for="center_longitude"><?php _e( 'Longitud', 'text_domain' ); ?></label>
+        <input type="text" name="center_longitude" id="center_longitude" value="" />
+    </div>
+    <div class="form-field term-meta-text-wrap">
+        <label for="center_latitude"><?php _e( 'Latitud', 'text_domain' ); ?></label>
+        <input type="text" name="center_latitude" id="center_latitude" value="" />
+    </div>
+<?php }
+
+// ADD FIELD TO CATEGORY EDIT PAGE
+add_action( 'pa_centers_edit_form_fields', '___edit_form_field_term_meta_text' );
+function ___edit_form_field_term_meta_text( $term ) {
+  global $center_fields;
+  foreach($center_fields as $field => $name) {
+    $value = get_term_meta_value($term->term_id, $field);
+
+    if ( ! $value ) $value = ""; ?>
+
+    <tr class="form-field term-meta-text-wrap">
+    <th scope="row"><label for="<?php echo $field; ?>"><?php _e( $name, 'text_domain' ); ?></label></th>
+        <td>
+          <?php wp_nonce_field( basename( __FILE__ ), 'term_meta_text_nonce' ); ?>
+          <input type="text" name="<?php echo $field; ?>" id="term-meta-text" value="<?php echo esc_attr( $value ); ?>" />
+        </td>
+    </tr>
+  <?php }
+}
+
+// SAVE TERM META (on term edit & create)
+add_action( 'edit_pa_centers',   '___save_term_meta_text' );
+add_action( 'create_pa_centers', '___save_term_meta_text' );
+function ___save_term_meta_text( $term_id ) {
+  global $center_fields;
+  // verify the nonce --- remove if you don't care
+  if ( ! isset( $_POST['term_meta_text_nonce'] ) || ! wp_verify_nonce( $_POST['term_meta_text_nonce'], basename( __FILE__ ) ) )
+    return;
+
+  foreach($center_fields as $field => $name) {
+    $old_value  = get_term_meta_value( $term_id, $field );
+    $new_value = isset( $_POST[$field] ) ? sanitize_text_field( $_POST[$field] ) : '';
+
+    if ( $old_value && '' === $new_value )
+      delete_term_meta( $term_id, $field );
+
+    else if ( $old_value !== $new_value )
+      update_term_meta( $term_id, $field, $new_value );
+  }
+}
 
 
 // Helpers
