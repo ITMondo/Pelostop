@@ -109,17 +109,18 @@ function create_post_type() {
 }
 add_action( 'init', 'create_post_type' );
 
-$arr_centros = array(
-	array('id'=>'latitude','nombre'=>'Latitud'),
-	array('id'=>'longitude','nombre'=>'Longitud'),
+$center_fields = array(
+	array('id'=>'latitude','name'=>'Latitud'),
+	array('id'=>'longitude','name'=>'Longitud'),
 );
-function centros_register_meta_fields() {
-  global $arr_centros;
-  foreach($arr_centros as $centro){
-    register_meta('post',$centro['id'],'sanitize_text_field');
+
+function center_register_meta_fields() {
+  global $center_fields;
+  foreach($center_fields as $center){
+    register_meta('post',$center['id'],'sanitize_text_field');
   }
 }
-add_action('init', 'centros_register_meta_fields');
+add_action('init', 'center_register_meta_fields');
 
 function centers_meta_boxes() {
   add_meta_box('centers-meta-box', 'Datos del Centro', 'centers_meta_box_callback', 'center', 'normal','high');
@@ -127,22 +128,24 @@ function centers_meta_boxes() {
 add_action('add_meta_boxes', 'centers_meta_boxes' );
 
 function centers_meta_box_callback($post){
-  global $wpdb, $post, $arr_centros;
-  foreach($arr_centros as $centro){
-    print '<p><label class="label">'.$centro['nombre'].'</label><br/>';
-    print '<input name="'.$centro['id'].'" id="'.$centro['id'].'" type="text" value="'.htmlspecialchars(get_post_meta($post->ID, $centro['id'], true)).'"></p>';
+  global $post, $center_fields;
+  foreach($center_fields as $center) {
+    print '<p><label class="label">'.$center['name'].'</label><br/>';
+    print '<input name="'.$center['id'].'" id="'.$center['id'].'" type="text" value="'.htmlspecialchars(get_post_meta($post->ID, $center['id'], true)).'"></p>';
   }
 }
 
 function save_center() {
-  global $wpdb, $post, $arr_centros;
+  global $post, $center_fields;
   $post_id = $_POST['post_ID'];
   if (!$post_id) return $post;
 
-
-  foreach($arr_centros as $centro){
-    update_post_meta($post_id, $centro['id'], $_REQUEST[$centro['id']]);
+  foreach($center_fields as $center){
+    update_post_meta($post_id, $center['id'], $_POST[$center['id']]);
   }
+
+  if ( $_POST['post_type'] === 'center' )
+    wp_insert_term($_POST['post_title'], 'pa_centers', array('slug' => 'center_'.$post_id));
 }
 add_action('save_post', 'save_center');
 add_action('publish_post', 'save_center');
@@ -162,27 +165,52 @@ function my_custom_action() {
                    })
       , 4);
   $product_id = $product->get_id();
+  // $querystr = "
+  //   SELECT wp_termmeta.meta_key, wp_termmeta.meta_value, wp_posts.ID
+  //   FROM wp_posts
+  //   LEFT JOIN wp_postmeta ON wp_postmeta.post_id = wp_posts.ID
+  //   LEFT JOIN wp_terms ON wp_terms.slug = wp_postmeta.meta_value
+  //   LEFT JOIN wp_termmeta ON wp_termmeta.term_id = wp_terms.term_id
+  //   WHERE wp_postmeta.meta_key = 'attribute_pa_centers' AND ($variations_sql)
+  // ";
   $querystr = "
-    SELECT wp_termmeta.meta_key, wp_termmeta.meta_value, wp_posts.ID
+    SELECT wp_postmeta.meta_value
     FROM wp_posts
     LEFT JOIN wp_postmeta ON wp_postmeta.post_id = wp_posts.ID
-    LEFT JOIN wp_terms ON wp_terms.slug = wp_postmeta.meta_value
-    LEFT JOIN wp_termmeta ON wp_termmeta.term_id = wp_terms.term_id
-    WHERE wp_postmeta.meta_key = 'attribute_pa_centers' AND ($variations_sql)
+    WHERE ($variations_sql) AND wp_postmeta.meta_key = 'attribute_pa_centers'
+  ";
+  $center_ids = array_map(
+                          function ($var) {
+                            return substr($var[0], 7);
+                          }, $wpdb->get_results($querystr, ARRAY_N));
+
+  $center_sql = substr(
+      array_reduce($center_ids,
+                   function($carry, $item) {
+                     return $carry . " OR wp_posts.ID = " . $item;
+                   })
+      , 4);
+  $querystr = "
+    SELECT wp_postmeta.meta_key, wp_postmeta.meta_value
+    FROM wp_posts
+    LEFT JOIN wp_postmeta ON wp_postmeta.post_id = wp_posts.ID
+    WHERE ( $center_sql )
   ";
   $raw_centers = $wpdb->get_results($querystr, ARRAY_N);
 
   $centers = array();
+  $x = 0;
   foreach ($raw_centers as $center) {
-    if($center[0] === 'center_longitude') $longitude = $center[1];
-    if($center[0] === 'center_latitude') $latitude = $center[1];
+    if($center[0] === 'longitude') $longitude = $center[1];
+    if($center[0] === 'latitude') $latitude = $center[1];
 
     if (isset($longitude) && isset($latitude) ) {
       $xCenter = array(
           'longitude' => $longitude,
           'latitude' => $latitude,
-          'variation_id' => $center[2]
+          'variation_id' => $product_variation_ids[$x]
                        );
+      $x++;
       unset($latitude);
       unset($longitude);
       array_push($centers, $xCenter);
@@ -242,22 +270,23 @@ add_action( 'woocommerce_single_product_summary', 'my_custom_action', 30 );
 
 
 // CUSTOM WOOCOMMERCE TAXONOMY
-$center_fields = array('center_latitude' => 'Latitud', 'center_longitude' => 'Longitud');
+// $center_fields = array('center_latitude' => 'Latitud', 'center_longitude' => 'Longitud');
 
 // REGISTER TERM META
-add_action( 'init', '___register_term_meta_text' );
-function ___register_term_meta_text() {
-    register_meta( 'term', '__term_meta_text', 'sanitize_text_field' );
-}
+// add_action( 'init', '___register_term_meta_text' );
+// function ___register_term_meta_text() {
+//     register_meta( 'term', '__term_meta_text', 'sanitize_text_field' );
+// }
 
 
 // GETTER (will be sanitized)
-function get_term_meta_value( $term_id, $meta_key ) {
-  $value = get_term_meta( $term_id, $meta_key, true );
-  $value = sanitize_text_field( $value );
-  return $value;
-}
+// function get_term_meta_value( $term_id, $meta_key ) {
+//   $value = get_term_meta( $term_id, $meta_key, true );
+//   $value = sanitize_text_field( $value );
+//   return $value;
+// }
 
+/*
 // ADD FIELD TO CATEGORY TERM PAGE
 add_action( 'pa_centers_add_form_fields', '___add_form_field_term_meta_text' );
 function ___add_form_field_term_meta_text() {
@@ -270,7 +299,7 @@ function ___add_form_field_term_meta_text() {
         <input type="text" name="<?php echo $field; ?>" id="<php echo $field; ?>" value="" />
     </div>
   <?php }
-}
+  }
 
 // ADD FIELD TO CATEGORY EDIT PAGE
 add_action( 'pa_centers_edit_form_fields', '___edit_form_field_term_meta_text' );
@@ -292,25 +321,26 @@ function ___edit_form_field_term_meta_text( $term ) {
 }
 
 // SAVE TERM META (on term edit & create)
-add_action( 'edit_pa_centers',   '___save_term_meta_text' );
-add_action( 'create_pa_centers', '___save_term_meta_text' );
-function ___save_term_meta_text( $term_id ) {
-  global $center_fields;
-  // verify the nonce --- remove if you don't care
-  if ( ! isset( $_POST['term_meta_text_nonce'] ) || ! wp_verify_nonce( $_POST['term_meta_text_nonce'], basename( __FILE__ ) ) )
-    return;
+// add_action( 'edit_pa_centers',   '___save_term_meta_text' );
+// add_action( 'create_pa_centers', '___save_term_meta_text' );
+// function ___save_term_meta_text( $term_id ) {
+//   global $center_fields;
+//   // verify the nonce --- remove if you don't care
+//   if ( ! isset( $_POST['term_meta_text_nonce'] ) || ! wp_verify_nonce( $_POST['term_meta_text_nonce'], basename( __FILE__ ) ) )
+//     return;
 
-  foreach($center_fields as $field => $name) {
-    $old_value  = get_term_meta_value( $term_id, $field );
-    $new_value = isset( $_POST[$field] ) ? sanitize_text_field( $_POST[$field] ) : '';
+//   foreach($center_fields as $field => $name) {
+//     $old_value  = get_term_meta_value( $term_id, $field );
+//     $new_value = isset( $_POST[$field] ) ? sanitize_text_field( $_POST[$field] ) : '';
 
-    if ( $old_value && '' === $new_value )
-      delete_term_meta( $term_id, $field );
+//     if ( $old_value && '' === $new_value )
+//       delete_term_meta( $term_id, $field );
 
-    else if ( $old_value !== $new_value )
-      update_term_meta( $term_id, $field, $new_value );
-  }
-}
+//     else if ( $old_value !== $new_value )
+//       update_term_meta( $term_id, $field, $new_value );
+//   }
+// }
+*/
 
 
 // Helpers
