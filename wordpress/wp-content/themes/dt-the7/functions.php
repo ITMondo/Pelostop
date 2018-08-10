@@ -142,18 +142,38 @@ function save_center( $post_id, $post ) {
   foreach($center_fields as $center){
     update_post_meta($post_id, $center['id'], $_POST[$center['id']]);
   }
-
-  if ( $_POST['post_type'] === 'center') {
-		if ( term_exists('center_'.$post_id) ) {
-			wp_update_term('center_'.$post_id, 'pa_centers');
-		} else {
-			wp_insert_term('center_'.$post_id, 'pa_centers');
-		}
-	}
+  // if ( $_POST['post_type'] === 'center') {
+  //   	if ( term_exists('center_'.$post_id) ) {
+  //   		wp_update_term('center_'.$post_id, 'pa_centers');
+  //   	} else {
+  //   		wp_insert_term('center_'.$post_id, 'pa_centers');
+  //   	}
+  //   }
 }
-
 add_action('save_post', 'save_center', 10, 2);
 add_action('publish_post', 'save_center', 10, 2);
+
+// add center term
+function save_center_term( $new_status, $old_status, $post ) {
+  // chk if term exists
+    $term_id = get_post_meta($post->ID, 'center_id', true);
+    $term_exists = !empty($term_id);
+
+    if ( $post->post_type === 'center' ) {
+      if ($new_status === 'publish') {
+        if ( !$term_exists ) {
+          $center_id = wp_insert_term($post->post_title, 'pa_centers', array( 'slug' => 'center_'.$post->ID))['term_id'];
+          update_post_meta($post->ID, 'center_id', $center_id);
+        } else {
+          wp_update_term($term_id, 'pa_centers', array( 'name' => $post->post_title));
+        }
+      } else {
+        wp_delete_term($term_id, 'pa_centers');
+        delete_post_meta($post->ID, 'center_id');
+      }
+    }
+  }
+  add_action('transition_post_status', 'save_center_term', 10, 3);
 
 // single product page
 remove_action( 'woocommerce_after_shop_loop_item', 'woocommerce_template_loop_add_to_cart');
