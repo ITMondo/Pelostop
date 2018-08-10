@@ -136,20 +136,24 @@ function centers_meta_box_callback($post){
   }
 }
 
-function save_center() {
-  global $post, $center_fields;
-  $post_id = $_POST['post_ID'];
-  if (!$post_id) return $post;
+function save_center( $post_id, $post ) {
+  global $center_fields;
 
   foreach($center_fields as $center){
     update_post_meta($post_id, $center['id'], $_POST[$center['id']]);
   }
 
-  if ( $_POST['post_type'] === 'center' )
-    wp_insert_term($_POST['post_title'], 'pa_centers', array('slug' => 'center_'.$post_id));
+  if ( $_POST['post_type'] === 'center') {
+		if ( term_exists('center_'.$post_id) ) {
+			wp_update_term('center_'.$post_id, 'pa_centers');
+		} else {
+			wp_insert_term('center_'.$post_id, 'pa_centers');
+		}
+	}
 }
-add_action('save_post', 'save_center');
-add_action('publish_post', 'save_center');
+
+add_action('save_post', 'save_center', 10, 2);
+add_action('publish_post', 'save_center', 10, 2);
 
 // single product page
 remove_action( 'woocommerce_after_shop_loop_item', 'woocommerce_template_loop_add_to_cart');

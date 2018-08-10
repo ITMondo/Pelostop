@@ -1,0 +1,9 @@
+2018-08-10T10:49:47+00:00 CRITICAL Uncaught ArgumentCountError: Too few arguments to function save_center(), 1 passed in /Users/lisahornung/Developer/Pelostop/pelostop2/wordpress/wp-includes/class-wp-hook.php on line 288 and exactly 3 expected in /Users/lisahornung/Developer/Pelostop/pelostop2/wordpress/wp-content/themes/dt-the7/functions.php:139
+Stack trace:
+#0 /Users/lisahornung/Developer/Pelostop/pelostop2/wordpress/wp-includes/class-wp-hook.php(288): save_center(15)
+#1 /Users/lisahornung/Developer/Pelostop/pelostop2/wordpress/wp-includes/class-wp-hook.php(310): WP_Hook->apply_filters(NULL, Array)
+#2 /Users/lisahornung/Developer/Pelostop/pelostop2/wordpress/wp-includes/plugin.php(453): WP_Hook->do_action(Array)
+#3 /Users/lisahornung/Developer/Pelostop/pelostop2/wordpress/wp-includes/post.php(3673): do_action('save_post', 15, Object(WP_Post), true)
+#4 /Users/lisahornung/Developer/Pelostop/pelostop2/wordpress/wp-includes/post.php(3746): wp_insert_post(Array, false)
+#5 /Users/lisahornung/Developer/Pelostop/pelostop2/wordpress/wp-admin/includes
+
