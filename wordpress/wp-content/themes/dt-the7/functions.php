@@ -53,6 +53,7 @@ add_filter( 'woocommerce_product_data_tabs', 'custom_product_tabs' );
  */
 function giftcard_options_product_tab_content() {
 	global $post;
+	global $title;
     $centers = get_posts(array('post_type' => 'center'));
 
 	// Note the 'id' attribute needs to match the 'target' parameter set above
@@ -173,54 +174,71 @@ function my_custom_action() {
   //   LEFT JOIN wp_termmeta ON wp_termmeta.term_id = wp_terms.term_id
   //   WHERE wp_postmeta.meta_key = 'attribute_pa_centers' AND ($variations_sql)
   // ";
-  $querystr = "
-    SELECT wp_postmeta.meta_value
-    FROM wp_posts
-    LEFT JOIN wp_postmeta ON wp_postmeta.post_id = wp_posts.ID
-    WHERE ($variations_sql) AND wp_postmeta.meta_key = 'attribute_pa_centers'
-  ";
-  $center_ids = array_map(
-                          function ($var) {
-                            return substr($var[0], 7);
-                          }, $wpdb->get_results($querystr, ARRAY_N));
+  // $querystr = "
+  //   SELECT wp_postmeta.meta_value
+  //   FROM wp_posts
+  //   LEFT JOIN wp_postmeta ON wp_postmeta.post_id = wp_posts.ID
+  //   WHERE ($variations_sql) AND (wp_postmeta.meta_key = 'attribute_pa_centers')
+  // ";
+  //
+  // $center_ids = array_map(
+  //                         function ($var) {
+  //                           return substr($var[0], 7);
+  //                         }, $wpdb->get_results($querystr, ARRAY_N));
+  //
+  // $center_sql = substr(
+  //     array_reduce($center_ids,
+  //                  function($carry, $item) {
+  //                    return $carry . " OR wp_posts.ID = " . $item;
+  //                  })
+  //     , 4);
+  // $querystr = "
+  //   SELECT wp_postmeta.meta_key, wp_postmeta.meta_value, wp_posts.post_title
+  //   FROM wp_posts
+  //   LEFT JOIN wp_postmeta ON wp_postmeta.post_id = wp_posts.ID
+  //   WHERE ( $center_sql )
+  // ";
+  // $raw_centers = $wpdb->get_results($querystr, ARRAY_N);
 
-  $center_sql = substr(
-      array_reduce($center_ids,
-                   function($carry, $item) {
-                     return $carry . " OR wp_posts.ID = " . $item;
-                   })
-      , 4);
-  $querystr = "
-    SELECT wp_postmeta.meta_key, wp_postmeta.meta_value
-    FROM wp_posts
-    LEFT JOIN wp_postmeta ON wp_postmeta.post_id = wp_posts.ID
-    WHERE ( $center_sql )
-  ";
-  $raw_centers = $wpdb->get_results($querystr, ARRAY_N);
 
   $centers = array();
-  $x = 0;
-  foreach ($raw_centers as $center) {
-    if($center[0] === 'longitude') $longitude = $center[1];
-    if($center[0] === 'latitude') $latitude = $center[1];
+  foreach ($product_variation_ids as $variation_id) {
+		$product_variation = new WC_Product_Variation( $variation_id );
+		$center_id = substr($product_variation->get_variation_attributes()['attribute_pa_centers'], 7);
 
-    if (isset($longitude) && isset($latitude) ) {
+		$querystr = "
+		  SELECT wp_postmeta.meta_key, wp_postmeta.meta_value, wp_posts.post_title
+		  FROM wp_posts
+		  LEFT JOIN wp_postmeta ON wp_postmeta.post_id = wp_posts.ID
+		  WHERE wp_posts.ID = $center_id
+		";
+		$queried_centers = $wpdb->get_results($querystr, ARRAY_N);
+
+		foreach($queried_centers as $center) {
+			if ($center[0] === 'latitude') $latitude = $center[1];
+			if ($center[0] === 'longitude') $longitude = $center[1];
+		}
+
       $xCenter = array(
           'longitude' => $longitude,
           'latitude' => $latitude,
-          'variation_id' => $product_variation_ids[$x]
+					'add_to_cart_url' => $product_variation->add_to_cart_url(),
+					'add_to_cart_text' => $product_variation->add_to_cart_text(),
+					'center_title' => $center[2],
+					'price_html' =>  $product_variation ->get_price_html(),
+					'product_title' => $product->get_title(),
+					'product_short_description' => $product->get_short_description(),
+					'product_image' => $product->get_image()
                        );
-      $x++;
-      unset($latitude);
-      unset($longitude);
       array_push($centers, $xCenter);
-    }
   }
+
   $centers_json = json_encode($centers);
+
   ?>
   <!-- Button trigger modal -->
   <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
-    Launch demo modal
+    Select center (add to cart)
   </button>
 
   <!-- Modal -->
@@ -245,8 +263,20 @@ function my_custom_action() {
               var infowindow = new google.maps.InfoWindow()
               for ( center of centers ) {
                 const position = { lat: parseFloat(center.latitude), lng: parseFloat(center.longitude) };
-                const content = '<a href="/?add-to-cart=<?php echo "$product_id"; ?>&variation_id='+center.variation_id+'">Add to cart</a>';
-                const marker = new google.maps.Marker({ position, map: map, title: "Hello" });
+                const content = '<div id="content">'+
+            '<div id="siteNotice">'+
+            '</div>'+
+            '<h3 id="firstHeading" class="firstHeading"> '+center.center_title+' </h3>'+
+            '<div id="bodyContent">'+
+            '<p>'+center.product_title+'</p>'+
+						'<p>Price: '+center.price_html+' </p>'+
+						'<p>'+center.product_short_description+' </p>'+
+						'<p>'+center.product_image+'</p>'+
+						'<a href="'+center.add_to_cart_url+'">'+center.add_to_cart_text+'</a>'+
+            '</div>'+
+            '</div>';
+						//
+                const marker = new google.maps.Marker({ position, map: map, title: center.center_title });
                 google.maps.event.addListener(marker,'click', (function(marker,content,infowindow){
                   return function() {
                     infowindow.setContent(content);

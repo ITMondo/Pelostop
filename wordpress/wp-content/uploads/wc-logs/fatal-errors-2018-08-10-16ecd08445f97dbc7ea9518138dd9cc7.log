@@ -1,0 +1,10 @@
+2018-08-10T08:19:15+00:00 CRITICAL Uncaught Error: Call to a member function get_title() on string in /Users/lisahornung/Developer/Pelostop/pelostop2/wordpress/wp-content/themes/dt-the7/functions.php:215
+Stack trace:
+#0 /Users/lisahornung/Developer/Pelostop/pelostop2/wordpress/wp-includes/class-wp-hook.php(286): my_custom_action('')
+#1 /Users/lisahornung/Developer/Pelostop/pelostop2/wordpress/wp-includes/class-wp-hook.php(310): WP_Hook->apply_filters(NULL, Array)
+#2 /Users/lisahornung/Developer/Pelostop/pelostop2/wordpress/wp-includes/plugin.php(453): WP_Hook->do_action(Array)
+#3 /Users/lisahornung/Developer/Pelostop/pelostop2/wordpress/wp-content/plugins/woocommerce/templates/content-single-product.php(58): do_action('woocommerce_sin...')
+#4 /Users/lisahornung/Developer/Pelostop/pelostop2/wordpress/wp-includes/template.php(690): require('/Users/lisahorn...')
+#5 /Users/lisahornung/Developer/Pelostop/pelostop2/wordpress/wp-content/plugins/woocommerce/includes/wc-core-functions.php(179): load_template('/Users/lisahorn...', false)
+#6 /Users/lisah
+

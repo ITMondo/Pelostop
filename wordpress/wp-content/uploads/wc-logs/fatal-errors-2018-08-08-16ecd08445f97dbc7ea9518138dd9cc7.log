@@ -1,0 +1,45 @@
+2018-08-08T09:11:17+00:00 CRITICAL Uncaught Error: Call to undefined function array_filter_key() in /Users/lisahornung/Developer/Pelostop/pelostop2/wordpress/wp-content/themes/storefront/functions.php:121
+Stack trace:
+#0 /Users/lisahornung/Developer/Pelostop/pelostop2/wordpress/wp-includes/class-wp-hook.php(286): save_giftcard_option_fields(46)
+#1 /Users/lisahornung/Developer/Pelostop/pelostop2/wordpress/wp-includes/class-wp-hook.php(310): WP_Hook->apply_filters('', Array)
+#2 /Users/lisahornung/Developer/Pelostop/pelostop2/wordpress/wp-includes/plugin.php(453): WP_Hook->do_action(Array)
+#3 /Users/lisahornung/Developer/Pelostop/pelostop2/wordpress/wp-content/plugins/woocommerce/includes/admin/meta-boxes/class-wc-meta-box-product-data.php(399): do_action('woocommerce_pro...', 46)
+#4 /Users/lisahornung/Developer/Pelostop/pelostop2/wordpress/wp-includes/class-wp-hook.php(286): WC_Meta_Box_Product_Data::save(46, Object(WP_Post))
+#5 /Users/lisahornung/Developer/Pelostop/pelostop2/wordpress/wp-includes/class-wp-hook.php(310): WP_Hook->apply_filters('
+
+2018-08-08T09:14:52+00:00 CRITICAL Uncaught Error: Call to undefined function array_filter_key() in /Users/lisahornung/Developer/Pelostop/pelostop2/wordpress/wp-content/themes/storefront/functions.php:121
+Stack trace:
+#0 /Users/lisahornung/Developer/Pelostop/pelostop2/wordpress/wp-includes/class-wp-hook.php(286): save_giftcard_option_fields(46)
+#1 /Users/lisahornung/Developer/Pelostop/pelostop2/wordpress/wp-includes/class-wp-hook.php(310): WP_Hook->apply_filters('', Array)
+#2 /Users/lisahornung/Developer/Pelostop/pelostop2/wordpress/wp-includes/plugin.php(453): WP_Hook->do_action(Array)
+#3 /Users/lisahornung/Developer/Pelostop/pelostop2/wordpress/wp-content/plugins/woocommerce/includes/admin/meta-boxes/class-wc-meta-box-product-data.php(399): do_action('woocommerce_pro...', 46)
+#4 /Users/lisahornung/Developer/Pelostop/pelostop2/wordpress/wp-includes/class-wp-hook.php(286): WC_Meta_Box_Product_Data::save(46, Object(WP_Post))
+#5 /Users/lisahornung/Developer/Pelostop/pelostop2/wordpress/wp-includes/class-wp-hook.php(310): WP_Hook->apply_filters('
+
+2018-08-08T09:26:58+00:00 CRITICAL Uncaught Error: Call to undefined function array_key() in /Users/lisahornung/Developer/Pelostop/pelostop2/wordpress/wp-content/themes/storefront/functions.php:126
+Stack trace:
+#0 /Users/lisahornung/Developer/Pelostop/pelostop2/wordpress/wp-includes/class-wp-hook.php(286): save_giftcard_option_fields(46)
+#1 /Users/lisahornung/Developer/Pelostop/pelostop2/wordpress/wp-includes/class-wp-hook.php(310): WP_Hook->apply_filters('', Array)
+#2 /Users/lisahornung/Developer/Pelostop/pelostop2/wordpress/wp-includes/plugin.php(453): WP_Hook->do_action(Array)
+#3 /Users/lisahornung/Developer/Pelostop/pelostop2/wordpress/wp-content/plugins/woocommerce/includes/admin/meta-boxes/class-wc-meta-box-product-data.php(399): do_action('woocommerce_pro...', 46)
+#4 /Users/lisahornung/Developer/Pelostop/pelostop2/wordpress/wp-includes/class-wp-hook.php(286): WC_Meta_Box_Product_Data::save(46, Object(WP_Post))
+#5 /Users/lisahornung/Developer/Pelostop/pelostop2/wordpress/wp-includes/class-wp-hook.php(310): WP_Hook->apply_filters('', Arra
+
+2018-08-08T09:28:34+00:00 CRITICAL Uncaught Error: Call to undefined function array_key() in /Users/lisahornung/Developer/Pelostop/pelostop2/wordpress/wp-content/themes/storefront/functions.php:126
+Stack trace:
+#0 /Users/lisahornung/Developer/Pelostop/pelostop2/wordpress/wp-includes/class-wp-hook.php(286): save_giftcard_option_fields(46)
+#1 /Users/lisahornung/Developer/Pelostop/pelostop2/wordpress/wp-includes/class-wp-hook.php(310): WP_Hook->apply_filters('', Array)
+#2 /Users/lisahornung/Developer/Pelostop/pelostop2/wordpress/wp-includes/plugin.php(453): WP_Hook->do_action(Array)
+#3 /Users/lisahornung/Developer/Pelostop/pelostop2/wordpress/wp-content/plugins/woocommerce/includes/admin/meta-boxes/class-wc-meta-box-product-data.php(399): do_action('woocommerce_pro...', 46)
+#4 /Users/lisahornung/Developer/Pelostop/pelostop2/wordpress/wp-includes/class-wp-hook.php(286): WC_Meta_Box_Product_Data::save(46, Object(WP_Post))
+#5 /Users/lisahornung/Developer/Pelostop/pelostop2/wordpress/wp-includes/class-wp-hook.php(310): WP_Hook->apply_filters('', Arra
+
+2018-08-08T09:29:07+00:00 CRITICAL Uncaught Error: Call to undefined function array_key() in /Users/lisahornung/Developer/Pelostop/pelostop2/wordpress/wp-content/themes/storefront/functions.php:126
+Stack trace:
+#0 /Users/lisahornung/Developer/Pelostop/pelostop2/wordpress/wp-includes/class-wp-hook.php(286): save_giftcard_option_fields(46)
+#1 /Users/lisahornung/Developer/Pelostop/pelostop2/wordpress/wp-includes/class-wp-hook.php(310): WP_Hook->apply_filters('', Array)
+#2 /Users/lisahornung/Developer/Pelostop/pelostop2/wordpress/wp-includes/plugin.php(453): WP_Hook->do_action(Array)
+#3 /Users/lisahornung/Developer/Pelostop/pelostop2/wordpress/wp-content/plugins/woocommerce/includes/admin/meta-boxes/class-wc-meta-box-product-data.php(399): do_action('woocommerce_pro...', 46)
+#4 /Users/lisahornung/Developer/Pelostop/pelostop2/wordpress/wp-includes/class-wp-hook.php(286): WC_Meta_Box_Product_Data::save(46, Object(WP_Post))
+#5 /Users/lisahornung/Developer/Pelostop/pelostop2/wordpress/wp-includes/class-wp-hook.php(310): WP_Hook->apply_filters('', Arra
+
