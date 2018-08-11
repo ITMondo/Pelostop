@@ -101,13 +101,6 @@ add_action( 'woocommerce_process_product_meta_variable', 'save_giftcard_option_f
 
 
 function create_post_type() {
-
-	$rewrite = array(
-	    'slug'                => 'centers',
-	    'with_front'          => true,
-	    'pages'               => true,
-	    'feeds'               => true);
-
 	  register_post_type( 'center',
 	                      array(
 	                          'labels' => array(
@@ -115,24 +108,8 @@ function create_post_type() {
 	                              'singular_name' => __( 'Center' )
 	                                            ),
 	                          'public' => true,
-	                          'has_archive' => true,
-	                          'supports' => array('title'),
-												    'description'         => __( 'Post Type for Media', 'text_domain' ),
-												    'taxonomies'          => array( 'year', 'type' ),
-												    'hierarchical'        => false,
-												    'show_ui'             => true,
-												    'show_in_menu'        => true,
-												    'show_in_nav_menus'   => true,
-												    'show_in_admin_bar'   => true,
-												    'menu_position'       => 5,
-												    'can_export'          => true,
-												    'exclude_from_search' => false,
-												    'publicly_queryable'  => true,
-												    'query_var'           => 'centers',
-												    'rewrite'             => $rewrite,
-												    'capability_type'     => 'page'
-												                            )
-	                      );
+                                )
+                          );
 }
 add_action( 'init', 'create_post_type' );
 		flush_rewrite_rules();
@@ -140,7 +117,7 @@ add_action( 'init', 'create_post_type' );
 $center_fields = array(
 	array('id'=>'web_name','name'=>'Nombre Web'),
 	array('id'=>'street','name'=>'Calle'),
-  array('id'=>'number','name'=>'Número'),
+    array('id'=>'number','name'=>'Número'),
 	array('id'=>'door','name'=>'Puerta'),
 	array('id'=>'zipcode','name'=>'Código Postal'),
 	array('id'=>'town','name'=>'Población'),
@@ -180,8 +157,11 @@ function centers_meta_box_callback($post){
 function save_center( $post_id, $post ) {
   global $center_fields;
 
+
+
   foreach($center_fields as $center){
-    update_post_meta($post_id, $center['id'], $_POST[$center['id']]);
+    if (array_key_exists($center['id'], $_POST))
+      update_post_meta($post_id, $center['id'], $_POST[$center['id']]);
   }
   // if ( $_POST['post_type'] === 'center') {
   //   	if ( term_exists('center_'.$post_id) ) {
