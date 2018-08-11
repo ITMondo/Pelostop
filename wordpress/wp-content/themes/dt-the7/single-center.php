@@ -27,7 +27,7 @@ get_header( 'single' );
 			<?php if ( post_password_required() ): ?>
 
 				<article id="post-<?php the_ID() ?>" <?php post_class() ?>>
-
+sdf asdfa sf
 					<?php
 					do_action( 'presscore_before_post_content' );
 
