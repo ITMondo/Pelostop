@@ -39,7 +39,7 @@ add_action( 'wp_enqueue_scripts', 'my_scripts' );
 /**
  * Add a custom product tab.
  */
-function custom_product_tabs( $tabs) {
+/*function custom_product_tabs( $tabs) {
 	$tabs['centers'] = array(
 		'label'		=> __( 'Centers', 'woocommerce' ),
 		'target'	=> 'centers_options',
@@ -51,7 +51,7 @@ add_filter( 'woocommerce_product_data_tabs', 'custom_product_tabs' );
 /**
  * Contents of the gift card options product tab.
  */
-function giftcard_options_product_tab_content() {
+/*function giftcard_options_product_tab_content() {
 	global $post;
 	global $title;
     $centers = get_posts(array('post_type' => 'center'));
@@ -71,7 +71,9 @@ function giftcard_options_product_tab_content() {
 
 	</div><?php
 }
-add_filter( 'woocommerce_product_data_panels', 'giftcard_options_product_tab_content' ); // WC 2.6 and up
+add_filter( 'woocommerce_product_data_panels', 'giftcard_options_product_tab_content' ); // WC 2.6 and up    */
+
+
 
 /**
  * Save the custom fields.
@@ -95,24 +97,63 @@ add_action( 'woocommerce_process_product_meta_variable', 'save_giftcard_option_f
 // var_dump(get_posts(array('post_type' => 'center')));
 
 
+
+
+
 function create_post_type() {
-  register_post_type( 'center',
-                      array(
-                          'labels' => array(
-                              'name' => __( 'Centers' ),
-                              'singular_name' => __( 'Center' )
-                                            ),
-                          'public' => true,
-                          'has_archive' => true,
-                          'supports' => array('title')
-                            )
-                      );
+
+	$rewrite = array(
+	    'slug'                => 'centers',
+	    'with_front'          => true,
+	    'pages'               => true,
+	    'feeds'               => true);
+
+	  register_post_type( 'center',
+	                      array(
+	                          'labels' => array(
+	                              'name' => __( 'Centers' ),
+	                              'singular_name' => __( 'Center' )
+	                                            ),
+	                          'public' => true,
+	                          'has_archive' => true,
+	                          'supports' => array('title'),
+												    'description'         => __( 'Post Type for Media', 'text_domain' ),
+												    'taxonomies'          => array( 'year', 'type' ),
+												    'hierarchical'        => false,
+												    'show_ui'             => true,
+												    'show_in_menu'        => true,
+												    'show_in_nav_menus'   => true,
+												    'show_in_admin_bar'   => true,
+												    'menu_position'       => 5,
+												    'can_export'          => true,
+												    'exclude_from_search' => false,
+												    'publicly_queryable'  => true,
+												    'query_var'           => 'centers',
+												    'rewrite'             => $rewrite,
+												    'capability_type'     => 'page'
+												                            )
+	                      );
 }
 add_action( 'init', 'create_post_type' );
+		flush_rewrite_rules();
 
 $center_fields = array(
+	array('id'=>'web_name','name'=>'Nombre Web'),
+	array('id'=>'street','name'=>'Calle'),
+  array('id'=>'number','name'=>'Número'),
+	array('id'=>'door','name'=>'Puerta'),
+	array('id'=>'zipcode','name'=>'Código Postal'),
+	array('id'=>'town','name'=>'Población'),
+	array('id'=>'province','name'=>'Provincia'),
+	array('id'=>'telephone','name'=>'Teléfono'),
+	array('id'=>'email','name'=>'Email'),
+	array('id'=>'opening_hours','name'=>'Horarios'),
 	array('id'=>'latitude','name'=>'Latitud'),
 	array('id'=>'longitude','name'=>'Longitud'),
+	array('id'=>'group_company','name'=>'Grupo/Empresa'),
+	array('id'=>'paypal_available','name'=>'Paypal Disponible'),
+	array('id'=>'addons_available','name'=>'Addons Disponible'),
+	array('id'=>'redsys_available','name'=>'Redsys Disponible')
 );
 
 function center_register_meta_fields() {
