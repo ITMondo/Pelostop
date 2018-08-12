@@ -11,7 +11,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-get_header( 'single' );
+get_header();
 ?>
 
 <?php if ( have_posts() ) : while ( have_posts() ) : the_post(); ?>
@@ -19,6 +19,7 @@ get_header( 'single' );
 	<?php get_template_part( 'header-main' ) ?>
 
 	<?php if ( presscore_is_content_visible() ): ?>
+a;skdfjas;df
 
 		<?php do_action( 'presscore_before_loop' ) ?>
 
@@ -28,8 +29,10 @@ get_header( 'single' );
 
 				<article id="post-<?php the_ID() ?>" <?php post_class() ?>>
 
+
 					<?php
 					do_action( 'presscore_before_post_content' );
+exit();
 
 					the_content();
 					do_action( 'presscore_after_post_content' );

@@ -11,46 +11,35 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-get_header( 'single' );
+get_header();
+
+while(have_posts()) {
+  the_post();
+
+  class Center {
+    function __construct($post) {
+      $this->title = $post->post_title;
+    }
+
+    public $title;
+  }
+  $center = new Center($post);
+
+  ?>
+
+  <ul>
+    <li>
+      <?php print $center->title ?>
+    </li>
+  </ul>
+
+  <?php
+}
+// $args = array(
+//     'post_type' => 'center',
+
+// )
+
+
+get_footer();
 ?>
-
-<?php if ( have_posts() ) : while ( have_posts() ) : the_post(); ?>
-
-	<?php get_template_part( 'header-main' ) ?>
-
-	<?php if ( presscore_is_content_visible() ): ?>
-
-		<?php do_action( 'presscore_before_loop' ) ?>
-
-		<div id="content" class="content" role="main">
-
-			<?php if ( post_password_required() ): ?>
-
-				<article id="post-<?php the_ID() ?>" <?php post_class() ?>>
-sdf asdfa sf
-					<?php
-					do_action( 'presscore_before_post_content' );
-
-					the_content();
-					do_action( 'presscore_after_post_content' );
-					?>
-
-				</article>
-
-			<?php else: ?>
-
-				<?php get_template_part( 'content-single', str_replace( 'dt_', '', get_post_type() ) ) ?>
-
-			<?php endif ?>
-
-			<?php comments_template( '', true ) ?>
-
-		</div><!-- #content -->
-
-		<?php do_action( 'presscore_after_content' ) ?>
-
-	<?php endif // content is visible ?>
-
-<?php endwhile; endif; // end of the loop. ?>
-
-<?php get_footer() ?>

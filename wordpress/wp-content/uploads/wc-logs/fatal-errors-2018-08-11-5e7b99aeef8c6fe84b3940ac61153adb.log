@@ -1,0 +1,28 @@
+2018-08-11T09:36:01+00:00 CRITICAL Uncaught Error: Cannot use object of type WP_Error as array in /Users/knowledge/Developer/Pelostop2/wordpress/wp-content/themes/dt-the7/functions.php:187
+Stack trace:
+#0 /Users/knowledge/Developer/Pelostop2/wordpress/wp-includes/class-wp-hook.php(286): save_center_term('publish', 'publish', Object(WP_Post))
+#1 /Users/knowledge/Developer/Pelostop2/wordpress/wp-includes/class-wp-hook.php(310): WP_Hook->apply_filters(NULL, Array)
+#2 /Users/knowledge/Developer/Pelostop2/wordpress/wp-includes/plugin.php(453): WP_Hook->do_action(Array)
+#3 /Users/knowledge/Developer/Pelostop2/wordpress/wp-includes/post.php(4128): do_action('transition_post...', 'publish', 'publish', Object(WP_Post))
+#4 /Users/knowledge/Developer/Pelostop2/wordpress/wp-includes/post.php(3588): wp_transition_post_status('publish', 'publish', Object(WP_Post))
+#5 /Users/knowledge/Developer/Pelostop2/wordpress/wp-includes/post.php(3746): wp_insert_post(Array, false)
+#6 /Users/knowledge/Developer/Pelostop2/wordpress/wp-admin/includes/post.php(377): wp_upd
+
+2018-08-11T09:40:15+00:00 CRITICAL Uncaught Error: Cannot use object of type WP_Post as array in /Users/knowledge/Developer/Pelostop2/wordpress/wp-content/themes/dt-the7/single-center.php:19
+Stack trace:
+#0 /Users/knowledge/Developer/Pelostop2/wordpress/wp-content/themes/dt-the7/single-center.php(24): Center->__construct()
+#1 /Users/knowledge/Developer/Pelostop2/wordpress/wp-includes/template-loader.php(74): include('/Users/knowledg...')
+#2 /Users/knowledge/Developer/Pelostop2/wordpress/wp-blog-header.php(19): require_once('/Users/knowledg...')
+#3 /Users/knowledge/Developer/Pelostop2/wordpress/index.php(17): require('/Users/knowledg...')
+#4 {main}
+  thrown
+
+2018-08-11T09:40:37+00:00 CRITICAL Uncaught Error: Cannot use object of type WP_Post as array in /Users/knowledge/Developer/Pelostop2/wordpress/wp-content/themes/dt-the7/single-center.php:18
+Stack trace:
+#0 /Users/knowledge/Developer/Pelostop2/wordpress/wp-content/themes/dt-the7/single-center.php(23): Center->__construct(Object(WP_Post))
+#1 /Users/knowledge/Developer/Pelostop2/wordpress/wp-includes/template-loader.php(74): include('/Users/knowledg...')
+#2 /Users/knowledge/Developer/Pelostop2/wordpress/wp-blog-header.php(19): require_once('/Users/knowledg...')
+#3 /Users/knowledge/Developer/Pelostop2/wordpress/index.php(17): require('/Users/knowledg...')
+#4 {main}
+  thrown
+

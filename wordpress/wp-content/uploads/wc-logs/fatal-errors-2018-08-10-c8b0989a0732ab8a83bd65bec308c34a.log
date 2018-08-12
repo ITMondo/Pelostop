@@ -1,0 +1,20 @@
+2018-08-10T12:32:28+00:00 CRITICAL Uncaught Error: Cannot use object of type WP_Post as array in /Users/knowledge/Developer/Pelostop2/wordpress/wp-content/themes/dt-the7/functions.php:159
+Stack trace:
+#0 /Users/knowledge/Developer/Pelostop2/wordpress/wp-includes/class-wp-hook.php(286): save_center_term('auto-draft', 'new', Object(WP_Post))
+#1 /Users/knowledge/Developer/Pelostop2/wordpress/wp-includes/class-wp-hook.php(310): WP_Hook->apply_filters(NULL, Array)
+#2 /Users/knowledge/Developer/Pelostop2/wordpress/wp-includes/plugin.php(453): WP_Hook->do_action(Array)
+#3 /Users/knowledge/Developer/Pelostop2/wordpress/wp-includes/post.php(4128): do_action('transition_post...', 'auto-draft', 'new', Object(WP_Post))
+#4 /Users/knowledge/Developer/Pelostop2/wordpress/wp-includes/post.php(3588): wp_transition_post_status('auto-draft', 'new', Object(WP_Post))
+#5 /Users/knowledge/Developer/Pelostop2/wordpress/wp-admin/includes/post.php(608): wp_insert_post(Array)
+#6 /Users/knowledge/Developer/Pelostop2/wordpress/wp-admin/includes/dashboard.php(499): get_def
+
+2018-08-10T12:33:00+00:00 CRITICAL Uncaught Error: Cannot use object of type WP_Post as array in /Users/knowledge/Developer/Pelostop2/wordpress/wp-content/themes/dt-the7/functions.php:159
+Stack trace:
+#0 /Users/knowledge/Developer/Pelostop2/wordpress/wp-includes/class-wp-hook.php(286): save_center_term('auto-draft', 'new', Object(WP_Post))
+#1 /Users/knowledge/Developer/Pelostop2/wordpress/wp-includes/class-wp-hook.php(310): WP_Hook->apply_filters(NULL, Array)
+#2 /Users/knowledge/Developer/Pelostop2/wordpress/wp-includes/plugin.php(453): WP_Hook->do_action(Array)
+#3 /Users/knowledge/Developer/Pelostop2/wordpress/wp-includes/post.php(4128): do_action('transition_post...', 'auto-draft', 'new', Object(WP_Post))
+#4 /Users/knowledge/Developer/Pelostop2/wordpress/wp-includes/post.php(3588): wp_transition_post_status('auto-draft', 'new', Object(WP_Post))
+#5 /Users/knowledge/Developer/Pelostop2/wordpress/wp-admin/includes/post.php(608): wp_insert_post(Array)
+#6 /Users/knowledge/Developer/Pelostop2/wordpress/wp-admin/post-new.php(70): get_default_post_t
+

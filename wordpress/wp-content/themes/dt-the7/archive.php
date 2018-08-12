@@ -16,11 +16,13 @@ $config->set( 'template.layout.type', 'masonry' );
 
 get_header();
 ?>
+du hund
 			<!-- Content -->
 			<div id="content" class="content" role="main">
 
 				<?php
 				the_archive_description( '<div class="taxonomy-description">', '</div>' );
+exit();
 
 				if ( have_posts() ) {
 					the7_archive_loop();

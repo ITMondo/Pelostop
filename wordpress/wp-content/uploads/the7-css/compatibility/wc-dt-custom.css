@@ -64,7 +64,7 @@
   background-color: #f7f7f7;
   -webkit-border-radius: 1px;
   border-radius: 1px;
-  width: 30%;
+  width: 0;
 }
 .outline-element-decoration .woocommerce-cart-wrap .cart-collaterals {
   -webkit-box-shadow: inset 0px 0px 0px 1px rgba(0,0,0,0);
@@ -89,7 +89,7 @@
 }
 .wc-order-review,
 .wc-side-column {
-  width: 30%;
+  width: 0;
   background-color: #f7f7f7;
   -webkit-border-radius: 1px;
   border-radius: 1px;
@@ -162,19 +162,19 @@ p.demo_store {
   background: linear-gradient(135deg, #1ebbf0 30%, #39dfaa 100%);
 }
 .checkout-page-title {
-  background-color: #ffffff;
-  color: #333333;
-  padding-top: 60px;
+  background-color: "";
+  color: #000000;
+  padding-top: 0px;
   padding-bottom: 0px;
 }
 .checkout-page-title nav {
   width: 1300px;
 }
 .checkout-page-title a.current {
-  color: #333333;
+  color: #000000;
 }
 .checkout-page-title a {
-  color: rgba(51,51,51,0.3);
+  color: rgba(0,0,0,0.3);
   font:   bold 24px / 34px "Roboto", Helvetica, Arial, Verdana, sans-serif;
   text-transform: none;
 }
@@ -188,12 +188,12 @@ p.demo_store {
   background: linear-gradient(135deg, #1ebbf0 30%, #39dfaa 100%);
 }
 .checkout-page-title .checkout-counter {
-  background-color: rgba(51,51,51,0.09);
-  color: rgba(51,51,51,0.3);
+  background-color: rgba(0,0,0,0.09);
+  color: rgba(0,0,0,0.3);
 }
 .checkout-page-title .checkout-step:before,
 .checkout-page-title .checkout-step:after {
-  background-color: rgba(51,51,51,0.09);
+  background-color: rgba(0,0,0,0.09);
 }
 .checkout-page-title .step-cart.hide-for-small .checkout-step:after {
   background-color: #1ebbf0;
@@ -670,7 +670,7 @@ form.lost_reset_password label .required,
 .wc-complete-wrap .woocommerce-bacs-bank-details,
 .shop_table_responsive,
 .woocommerce-cart-wrap .cross-sells {
-  width: calc(100% - 30% - 50px);
+  width: calc(100% - 0 - 50px);
 }
 .woocommerce-cart-wrap .cross-sells {
   margin-top: 30px;
@@ -1181,7 +1181,7 @@ a.wc-ico-cart:hover .counter {
 }
 .wc-ico-cart > .counter,
 .wc-ico-cart:hover > .counter {
-  color: #ffffff;
+  color: "";
 }
 .light-preset-color .masthead:not(#phantom):not(.sticky-on):not(.sticky-mobile-on) .wc-ico-cart > .counter,
 .light-preset-color .masthead:not(#phantom):not(.sticky-on):not(.sticky-mobile-on) .wc-ico-cart:hover > .counter {
@@ -1215,35 +1215,35 @@ a.wc-ico-cart:hover .counter {
 .resize-by-browser-width.wc-grid.dt-css-grid {
   grid-template-columns: repeat(,1fr);
   grid-template-rows: auto;
-  grid-column-gap: 44px;
-  grid-row-gap: 44px;
+  grid-column-gap: 0px;
+  grid-row-gap: 0px;
 }
 .cssgridlegacy.no-cssgrid .resize-by-browser-width.wc-grid.dt-css-grid,
 .no-cssgridlegacy.no-cssgrid .resize-by-browser-width.wc-grid.dt-css-grid {
-  margin: -22px;
+  margin: 0px;
 }
 .cssgridlegacy.no-cssgrid .resize-by-browser-width.wc-grid.dt-css-grid .wf-cell,
 .no-cssgridlegacy.no-cssgrid .resize-by-browser-width.wc-grid.dt-css-grid .wf-cell {
   width: 100%/;
-  padding: 22px;
+  padding: 0px;
 }
 .wc-grid.dt-css-grid:not(.resize-by-browser-width) {
-  grid-row-gap: 44px;
-  grid-column-gap: 44px;
-  grid-template-columns: repeat(auto-fit,minmax(220px,1fr));
+  grid-row-gap: 0px;
+  grid-column-gap: 0px;
+  grid-template-columns: repeat(auto-fit,minmax(0px,1fr));
 }
 .cssgridlegacy.no-cssgrid .wc-grid.dt-css-grid:not(.resize-by-browser-width),
 .no-cssgridlegacy.no-cssgrid .wc-grid.dt-css-grid:not(.resize-by-browser-width) {
   display: flex;
   flex-flow: row wrap;
-  margin: -22px;
+  margin: 0px;
 }
 .cssgridlegacy.no-cssgrid .wc-grid.dt-css-grid:not(.resize-by-browser-width) .wf-cell,
 .no-cssgridlegacy.no-cssgrid .wc-grid.dt-css-grid:not(.resize-by-browser-width) .wf-cell {
-  flex: 1 0 220px;
-  min-width: 220px;
+  flex: 1 0 0px;
+  min-width: 0px;
   max-width: 100%;
-  padding: 22px;
+  padding: 0px;
   box-sizing: border-box;
 }
 @media screen and (max-width: 1199px) {
@@ -1293,10 +1293,10 @@ a.wc-ico-cart:hover .counter {
   color: #8b8d94;
 }
 .wc-layout-list .woocom-project .woo-buttons-on-img {
-  width: 30%;
+  width: 0;
 }
 .wc-layout-list .woocom-project .woocom-list-content {
-  width: calc(100% - 30%);
+  width: calc(100% - 0);
 }
 .product .woo-buttons-on-img .out-stock-label {
   font-size: 14px;
@@ -1776,11 +1776,11 @@ ul.products {
   box-sizing: border-box;
 }
 .product div.images {
-  width: 50%;
+  width: 0;
   margin-right: 50px;
 }
 .product div.summary {
-  width: calc(100% - 50% - 50px);
+  width: calc(100% - 0 - 50px);
 }
 .woocommerce div.product div.summary > :last-child {
   margin-bottom: 0;

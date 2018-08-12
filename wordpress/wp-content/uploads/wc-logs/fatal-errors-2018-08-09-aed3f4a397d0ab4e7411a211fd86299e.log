@@ -1,0 +1,60 @@
+2018-08-09T08:57:26+00:00 CRITICAL Uncaught Error: Call to undefined function ___get_term_meta_text() in /Users/knowledge/Developer/Pelostop2/wordpress/wp-content/themes/dt-the7/functions.php:294
+Stack trace:
+#0 /Users/knowledge/Developer/Pelostop2/wordpress/wp-includes/class-wp-hook.php(288): ___save_term_meta_text(16)
+#1 /Users/knowledge/Developer/Pelostop2/wordpress/wp-includes/class-wp-hook.php(310): WP_Hook->apply_filters('', Array)
+#2 /Users/knowledge/Developer/Pelostop2/wordpress/wp-includes/plugin.php(453): WP_Hook->do_action(Array)
+#3 /Users/knowledge/Developer/Pelostop2/wordpress/wp-includes/taxonomy.php(2839): do_action('edit_pa_centers', 16, 16)
+#4 /Users/knowledge/Developer/Pelostop2/wordpress/wp-admin/edit-tags.php(165): wp_update_term(16, 'pa_centers', Array)
+#5 {main}
+  thrown
+
+2018-08-09T08:58:34+00:00 CRITICAL Uncaught ArgumentCountError: Too few arguments to function get_term_meta_value(), 1 passed in /Users/knowledge/Developer/Pelostop2/wordpress/wp-content/themes/dt-the7/functions.php on line 294 and exactly 2 expected in /Users/knowledge/Developer/Pelostop2/wordpress/wp-content/themes/dt-the7/functions.php:239
+Stack trace:
+#0 /Users/knowledge/Developer/Pelostop2/wordpress/wp-content/themes/dt-the7/functions.php(294): get_term_meta_value(16)
+#1 /Users/knowledge/Developer/Pelostop2/wordpress/wp-includes/class-wp-hook.php(288): ___save_term_meta_text(16)
+#2 /Users/knowledge/Developer/Pelostop2/wordpress/wp-includes/class-wp-hook.php(310): WP_Hook->apply_filters('', Array)
+#3 /Users/knowledge/Developer/Pelostop2/wordpress/wp-includes/plugin.php(453): WP_Hook->do_action(Array)
+#4 /Users/knowledge/Developer/Pelostop2/wordpress/wp-includes/taxonomy.php(2839): do_action('edit_pa_centers', 16, 16)
+#5 /Users/knowledge/Developer/Pelostop2/wordpress/wp-admin/edit-tags.php(165): wp_update_term(16, 'pa_centers', Array)
+#6 {m
+
+2018-08-09T08:58:53+00:00 CRITICAL Uncaught Error: Call to undefined function ___get_term_meta_text() in /Users/knowledge/Developer/Pelostop2/wordpress/wp-content/themes/dt-the7/functions.php:303
+Stack trace:
+#0 /Users/knowledge/Developer/Pelostop2/wordpress/wp-includes/class-wp-hook.php(288): ___save_term_meta_text(16)
+#1 /Users/knowledge/Developer/Pelostop2/wordpress/wp-includes/class-wp-hook.php(310): WP_Hook->apply_filters('', Array)
+#2 /Users/knowledge/Developer/Pelostop2/wordpress/wp-includes/plugin.php(453): WP_Hook->do_action(Array)
+#3 /Users/knowledge/Developer/Pelostop2/wordpress/wp-includes/taxonomy.php(2839): do_action('edit_pa_centers', 16, 16)
+#4 /Users/knowledge/Developer/Pelostop2/wordpress/wp-admin/edit-tags.php(165): wp_update_term(16, 'pa_centers', Array)
+#5 {main}
+  thrown
+
+2018-08-09T08:59:21+00:00 CRITICAL Uncaught Error: Call to undefined function get_term_text() in /Users/knowledge/Developer/Pelostop2/wordpress/wp-content/themes/dt-the7/functions.php:262
+Stack trace:
+#0 /Users/knowledge/Developer/Pelostop2/wordpress/wp-includes/class-wp-hook.php(288): ___edit_form_field_term_meta_text(Object(WP_Term))
+#1 /Users/knowledge/Developer/Pelostop2/wordpress/wp-includes/class-wp-hook.php(310): WP_Hook->apply_filters('', Array)
+#2 /Users/knowledge/Developer/Pelostop2/wordpress/wp-includes/plugin.php(453): WP_Hook->do_action(Array)
+#3 /Users/knowledge/Developer/Pelostop2/wordpress/wp-admin/edit-tag-form.php(223): do_action('pa_centers_edit...', Object(WP_Term), 'pa_centers')
+#4 /Users/knowledge/Developer/Pelostop2/wordpress/wp-admin/term.php(67): include('/Users/knowledg...')
+#5 {main}
+  thrown
+
+2018-08-09T08:59:46+00:00 CRITICAL Uncaught Error: Call to undefined function get_term_meta_text() in /Users/knowledge/Developer/Pelostop2/wordpress/wp-content/themes/dt-the7/functions.php:262
+Stack trace:
+#0 /Users/knowledge/Developer/Pelostop2/wordpress/wp-includes/class-wp-hook.php(288): ___edit_form_field_term_meta_text(Object(WP_Term))
+#1 /Users/knowledge/Developer/Pelostop2/wordpress/wp-includes/class-wp-hook.php(310): WP_Hook->apply_filters('', Array)
+#2 /Users/knowledge/Developer/Pelostop2/wordpress/wp-includes/plugin.php(453): WP_Hook->do_action(Array)
+#3 /Users/knowledge/Developer/Pelostop2/wordpress/wp-admin/edit-tag-form.php(223): do_action('pa_centers_edit...', Object(WP_Term), 'pa_centers')
+#4 /Users/knowledge/Developer/Pelostop2/wordpress/wp-admin/term.php(67): include('/Users/knowledg...')
+#5 {main}
+  thrown
+
+2018-08-09T11:30:25+00:00 CRITICAL Uncaught Error: Call to protected method WC_Product_Variable::sort_variation_prices() from context '' in /Users/knowledge/Developer/Pelostop2/wordpress/wp-content/themes/dt-the7/functions.php:157
+Stack trace:
+#0 /Users/knowledge/Developer/Pelostop2/wordpress/wp-includes/class-wp-hook.php(286): my_custom_action('')
+#1 /Users/knowledge/Developer/Pelostop2/wordpress/wp-includes/class-wp-hook.php(310): WP_Hook->apply_filters(NULL, Array)
+#2 /Users/knowledge/Developer/Pelostop2/wordpress/wp-includes/plugin.php(453): WP_Hook->do_action(Array)
+#3 /Users/knowledge/Developer/Pelostop2/wordpress/wp-content/plugins/woocommerce/templates/content-single-product.php(58): do_action('woocommerce_sin...')
+#4 /Users/knowledge/Developer/Pelostop2/wordpress/wp-includes/template.php(690): require('/Users/knowledg...')
+#5 /Users/knowledge/Developer/Pelostop2/wordpress/wp-content/plugins/woocommerce/includes/wc-core-functions.php(179): load_template('/Users/knowledg...', false)
+#6 /Users/knowledge/Developer/Pelostop2/wordpress/wp-c
+

@@ -1,0 +1,24 @@
+2018-08-11T07:56:50+00:00 CRITICAL Uncaught Error: Call to undefined function the_posts() in /Users/knowledge/Developer/Pelostop2/wordpress/wp-content/themes/dt-the7/single-center.php:18
+Stack trace:
+#0 /Users/knowledge/Developer/Pelostop2/wordpress/wp-includes/template-loader.php(74): include()
+#1 /Users/knowledge/Developer/Pelostop2/wordpress/wp-blog-header.php(19): require_once('/Users/knowledg...')
+#2 /Users/knowledge/Developer/Pelostop2/wordpress/index.php(17): require('/Users/knowledg...')
+#3 {main}
+  thrown
+
+2018-08-11T07:57:52+00:00 CRITICAL Uncaught Error: Call to undefined function the_posts() in /Users/knowledge/Developer/Pelostop2/wordpress/wp-content/themes/dt-the7/single-center.php:19
+Stack trace:
+#0 /Users/knowledge/Developer/Pelostop2/wordpress/wp-includes/template-loader.php(74): include()
+#1 /Users/knowledge/Developer/Pelostop2/wordpress/wp-blog-header.php(19): require_once('/Users/knowledg...')
+#2 /Users/knowledge/Developer/Pelostop2/wordpress/index.php(17): require('/Users/knowledg...')
+#3 {main}
+  thrown
+
+2018-08-11T09:15:11+00:00 CRITICAL Uncaught Error: Call to undefined function get_custom_field() in /Users/knowledge/Developer/Pelostop2/wordpress/wp-content/themes/dt-the7/single-center.php:22
+Stack trace:
+#0 /Users/knowledge/Developer/Pelostop2/wordpress/wp-includes/template-loader.php(74): include()
+#1 /Users/knowledge/Developer/Pelostop2/wordpress/wp-blog-header.php(19): require_once('/Users/knowledg...')
+#2 /Users/knowledge/Developer/Pelostop2/wordpress/index.php(17): require('/Users/knowledg...')
+#3 {main}
+  thrown
+

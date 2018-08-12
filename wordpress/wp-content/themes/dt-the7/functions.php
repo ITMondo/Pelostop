@@ -108,6 +108,7 @@ function create_post_type() {
 	                              'singular_name' => __( 'Center' )
 	                                            ),
 	                          'public' => true,
+                              'has_archive' => true
                                 )
                           );
 }
@@ -157,19 +158,10 @@ function centers_meta_box_callback($post){
 function save_center( $post_id, $post ) {
   global $center_fields;
 
-
-
   foreach($center_fields as $center){
     if (array_key_exists($center['id'], $_POST))
       update_post_meta($post_id, $center['id'], $_POST[$center['id']]);
   }
-  // if ( $_POST['post_type'] === 'center') {
-  //   	if ( term_exists('center_'.$post_id) ) {
-  //   		wp_update_term('center_'.$post_id, 'pa_centers');
-  //   	} else {
-  //   		wp_insert_term('center_'.$post_id, 'pa_centers');
-  //   	}
-  //   }
 }
 add_action('save_post', 'save_center', 10, 2);
 add_action('publish_post', 'save_center', 10, 2);
