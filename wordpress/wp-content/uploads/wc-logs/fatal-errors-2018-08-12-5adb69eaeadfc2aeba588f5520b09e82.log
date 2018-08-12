@@ -87,3 +87,19 @@ Stack trace:
 #3 {main}
   thrown
 
+2018-08-12T14:33:28+00:00 CRITICAL Uncaught Error: Using $this when not in object context in /Users/lisahornung/Developer/Pelostop/pelostop2/wordpress/wp-content/themes/dt-the7/single-center.php:73
+Stack trace:
+#0 /Users/lisahornung/Developer/Pelostop/pelostop2/wordpress/wp-includes/template-loader.php(74): include()
+#1 /Users/lisahornung/Developer/Pelostop/pelostop2/wordpress/wp-blog-header.php(19): require_once('/Users/lisahorn...')
+#2 /Users/lisahornung/Developer/Pelostop/pelostop2/wordpress/index.php(17): require('/Users/lisahorn...')
+#3 {main}
+  thrown
+
+2018-08-12T14:34:14+00:00 CRITICAL Uncaught Error: Using $this when not in object context in /Users/lisahornung/Developer/Pelostop/pelostop2/wordpress/wp-content/themes/dt-the7/single-center.php:73
+Stack trace:
+#0 /Users/lisahornung/Developer/Pelostop/pelostop2/wordpress/wp-includes/template-loader.php(74): include()
+#1 /Users/lisahornung/Developer/Pelostop/pelostop2/wordpress/wp-blog-header.php(19): require_once('/Users/lisahorn...')
+#2 /Users/lisahornung/Developer/Pelostop/pelostop2/wordpress/index.php(17): require('/Users/lisahorn...')
+#3 {main}
+  thrown
+

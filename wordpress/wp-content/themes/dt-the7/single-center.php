@@ -18,11 +18,12 @@ get_header( 'single' );
 
 <?php if ( have_posts() ) : while ( have_posts() ) : the_post();
 	class Center {
-    private $fields = ['longitude', 'latitude'];
+    private $fields = ['longitude', 'latitude', 'google_place_id'];
 
 		function __construct($post) {
 			$post_meta = get_post_meta($post->ID);
 			$this->title = $post->post_title;
+
 
 			foreach($this->fields as $field){
 				$this->$field = $post_meta[$field][0];
@@ -34,19 +35,18 @@ get_header( 'single' );
 
 		public $title;
 
-		public function get_attributes(){
+		public function get_attributes_json(){
 			$field_array = array();
 			foreach($this->fields as $field) {
 				$field_array[$field] = $this->$field;
 			}
-			return $field_array;
+			return json_encode($field_array);
 		}
 	}
 
 	//get_attributes($$field);
 
   $center = new Center($post);
-	dump($center->get_attributes());
 ?>
 	adhs (above content)
 
@@ -60,18 +60,12 @@ hello (down)
 		<div id="content" class="content" role="main">
 content
 
-			<div id='center_map' style="width: 100%; height: 70vh;">
-  			<script>
-      		var map;
-      		function initMap() {
-        		map = new google.maps.Map(document.getElementById('center_map'), {
-          	center: {lat: 40.416775, lng: -3.703790	},
-          	zoom: 8});
-      		}
-
-					//const position = { lat: parseFloat(center.latitude), lng: parseFloat(center.longitude) };
-					//const marker = new google.maps.Marker({ position, map: map, title: center.center_title });
-				</script>
+				<iframe
+  				width="600"
+  				height="450"
+  				frameborder="0" style="border:0"
+  				src="https://www.google.com/maps/embed/v1/place?key=AIzaSyCYd8IA-EXnP5i9eUGf3WeIJpj3nOFuVVA&q=place_id:<?php echo $center->google_place_id; ?>" allowfullscreen>
+</iframe>
 			</div>
 
 

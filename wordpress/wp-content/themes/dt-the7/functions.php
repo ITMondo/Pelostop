@@ -29,7 +29,7 @@ function my_scripts() {
   wp_enqueue_style('bootstrap4', 'https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css');
   wp_enqueue_style('pelostopCSS', get_template_directory_uri() . '/pelostop.css');
   wp_enqueue_script( 'boot3', 'https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js', array( 'jquery' ),'',true );
-  wp_enqueue_script( 'googleMaps', 'https://maps.googleapis.com/maps/api/js?key=AIzaSyBX883Unw_-pC7pFogMWdNzklp0GQEsa9U&callback=initMap','','',true );
+  // wp_enqueue_script( 'googleMaps', 'https://maps.googleapis.com/maps/api/js?key=AIzaSyBX883Unw_-pC7pFogMWdNzklp0GQEsa9U&callback=initMap','','',true );
 }
 add_action( 'wp_enqueue_scripts', 'my_scripts' );
 
@@ -117,7 +117,7 @@ add_action( 'init', 'create_post_type' );
 $center_fields = array(
 	array('id'=>'web_name','name'=>'Nombre Web'),
 	array('id'=>'street','name'=>'Calle'),
-    array('id'=>'number','name'=>'Número'),
+  array('id'=>'number','name'=>'Número'),
 	array('id'=>'door','name'=>'Puerta'),
 	array('id'=>'zipcode','name'=>'Código Postal'),
 	array('id'=>'town','name'=>'Población'),
@@ -127,6 +127,7 @@ $center_fields = array(
 	array('id'=>'opening_hours','name'=>'Horarios'),
 	array('id'=>'latitude','name'=>'Latitud'),
 	array('id'=>'longitude','name'=>'Longitud'),
+	array('id'=>'google_place_id','name' => 'Google Place ID'),
 	array('id'=>'group_company','name'=>'Grupo/Empresa'),
 	array('id'=>'paypal_available','name'=>'Paypal Disponible'),
 	array('id'=>'addons_available','name'=>'Addons Disponible'),
