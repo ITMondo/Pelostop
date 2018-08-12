@@ -118,7 +118,7 @@ add_action( 'init', 'create_post_type' );
 $center_fields = array(
 	array('id'=>'web_name','name'=>'Nombre Web'),
 	array('id'=>'street','name'=>'Calle'),
-    array('id'=>'number','name'=>'Número'),
+  array('id'=>'number','name'=>'Número'),
 	array('id'=>'door','name'=>'Puerta'),
 	array('id'=>'zipcode','name'=>'Código Postal'),
 	array('id'=>'town','name'=>'Población'),
@@ -128,6 +128,7 @@ $center_fields = array(
 	array('id'=>'opening_hours','name'=>'Horarios'),
 	array('id'=>'latitude','name'=>'Latitud'),
 	array('id'=>'longitude','name'=>'Longitud'),
+	array('id'=>'google_place_id','name' => 'Google Place ID'),
 	array('id'=>'group_company','name'=>'Grupo/Empresa'),
 	array('id'=>'paypal_available','name'=>'Paypal Disponible'),
 	array('id'=>'addons_available','name'=>'Addons Disponible'),
