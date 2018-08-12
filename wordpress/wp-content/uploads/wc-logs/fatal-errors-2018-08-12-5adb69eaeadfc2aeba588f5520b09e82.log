@@ -1,0 +1,89 @@
+2018-08-12T09:22:00+00:00 CRITICAL Uncaught Error: Class 'Center' not found in /Users/lisahornung/Developer/Pelostop/pelostop2/wordpress/wp-content/themes/dt-the7/single-center.php:27
+Stack trace:
+#0 /Users/lisahornung/Developer/Pelostop/pelostop2/wordpress/wp-includes/template-loader.php(74): include()
+#1 /Users/lisahornung/Developer/Pelostop/pelostop2/wordpress/wp-blog-header.php(19): require_once('/Users/lisahorn...')
+#2 /Users/lisahornung/Developer/Pelostop/pelostop2/wordpress/index.php(17): require('/Users/lisahorn...')
+#3 {main}
+  thrown
+
+2018-08-12T09:22:08+00:00 CRITICAL Uncaught Error: Class 'Center' not found in /Users/lisahornung/Developer/Pelostop/pelostop2/wordpress/wp-content/themes/dt-the7/single-center.php:27
+Stack trace:
+#0 /Users/lisahornung/Developer/Pelostop/pelostop2/wordpress/wp-includes/template-loader.php(74): include()
+#1 /Users/lisahornung/Developer/Pelostop/pelostop2/wordpress/wp-blog-header.php(19): require_once('/Users/lisahorn...')
+#2 /Users/lisahornung/Developer/Pelostop/pelostop2/wordpress/index.php(17): require('/Users/lisahorn...')
+#3 {main}
+  thrown
+
+2018-08-12T09:22:42+00:00 CRITICAL Uncaught Error: Class 'Center' not found in /Users/lisahornung/Developer/Pelostop/pelostop2/wordpress/wp-content/themes/dt-the7/single-center.php:27
+Stack trace:
+#0 /Users/lisahornung/Developer/Pelostop/pelostop2/wordpress/wp-includes/template-loader.php(74): include()
+#1 /Users/lisahornung/Developer/Pelostop/pelostop2/wordpress/wp-blog-header.php(19): require_once('/Users/lisahorn...')
+#2 /Users/lisahornung/Developer/Pelostop/pelostop2/wordpress/index.php(17): require('/Users/lisahorn...')
+#3 {main}
+  thrown
+
+2018-08-12T09:23:41+00:00 CRITICAL Uncaught Error: Class 'Center' not found in /Users/lisahornung/Developer/Pelostop/pelostop2/wordpress/wp-content/themes/dt-the7/single-center.php:27
+Stack trace:
+#0 /Users/lisahornung/Developer/Pelostop/pelostop2/wordpress/wp-includes/template-loader.php(74): include()
+#1 /Users/lisahornung/Developer/Pelostop/pelostop2/wordpress/wp-blog-header.php(19): require_once('/Users/lisahorn...')
+#2 /Users/lisahornung/Developer/Pelostop/pelostop2/wordpress/index.php(17): require('/Users/lisahorn...')
+#3 {main}
+  thrown
+
+2018-08-12T09:24:38+00:00 CRITICAL Uncaught Error: Class 'Center' not found in /Users/lisahornung/Developer/Pelostop/pelostop2/wordpress/wp-content/themes/dt-the7/single-center.php:27
+Stack trace:
+#0 /Users/lisahornung/Developer/Pelostop/pelostop2/wordpress/wp-includes/template-loader.php(74): include()
+#1 /Users/lisahornung/Developer/Pelostop/pelostop2/wordpress/wp-blog-header.php(19): require_once('/Users/lisahorn...')
+#2 /Users/lisahornung/Developer/Pelostop/pelostop2/wordpress/index.php(17): require('/Users/lisahorn...')
+#3 {main}
+  thrown
+
+2018-08-12T10:11:41+00:00 CRITICAL Uncaught ArgumentCountError: Too few arguments to function Center::__construct(), 1 passed in /Users/lisahornung/Developer/Pelostop/pelostop2/wordpress/wp-content/themes/dt-the7/single-center.php on line 42 and exactly 2 expected in /Users/lisahornung/Developer/Pelostop/pelostop2/wordpress/wp-content/themes/dt-the7/single-center.php:23
+Stack trace:
+#0 /Users/lisahornung/Developer/Pelostop/pelostop2/wordpress/wp-content/themes/dt-the7/single-center.php(42): Center->__construct(Object(WP_Post))
+#1 /Users/lisahornung/Developer/Pelostop/pelostop2/wordpress/wp-includes/template-loader.php(74): include('/Users/lisahorn...')
+#2 /Users/lisahornung/Developer/Pelostop/pelostop2/wordpress/wp-blog-header.php(19): require_once('/Users/lisahorn...')
+#3 /Users/lisahornung/Developer/Pelostop/pelostop2/wordpress/index.php(17): require('/Users/lisahorn...')
+#4 {main}
+  thrown
+
+2018-08-12T11:07:33+00:00 CRITICAL Uncaught Error: Call to undefined function get_attributes() in /Users/lisahornung/Developer/Pelostop/pelostop2/wordpress/wp-content/themes/dt-the7/single-center.php:53
+Stack trace:
+#0 /Users/lisahornung/Developer/Pelostop/pelostop2/wordpress/wp-includes/template-loader.php(74): include()
+#1 /Users/lisahornung/Developer/Pelostop/pelostop2/wordpress/wp-blog-header.php(19): require_once('/Users/lisahorn...')
+#2 /Users/lisahornung/Developer/Pelostop/pelostop2/wordpress/index.php(17): require('/Users/lisahorn...')
+#3 {main}
+  thrown
+
+2018-08-12T11:19:43+00:00 CRITICAL Uncaught Error: Call to undefined function get_attributes() in /Users/lisahornung/Developer/Pelostop/pelostop2/wordpress/wp-content/themes/dt-the7/single-center.php:50
+Stack trace:
+#0 /Users/lisahornung/Developer/Pelostop/pelostop2/wordpress/wp-includes/template-loader.php(74): include()
+#1 /Users/lisahornung/Developer/Pelostop/pelostop2/wordpress/wp-blog-header.php(19): require_once('/Users/lisahorn...')
+#2 /Users/lisahornung/Developer/Pelostop/pelostop2/wordpress/index.php(17): require('/Users/lisahorn...')
+#3 {main}
+  thrown
+
+2018-08-12T11:20:01+00:00 CRITICAL Uncaught Error: Call to undefined function get_attributes() in /Users/lisahornung/Developer/Pelostop/pelostop2/wordpress/wp-content/themes/dt-the7/single-center.php:50
+Stack trace:
+#0 /Users/lisahornung/Developer/Pelostop/pelostop2/wordpress/wp-includes/template-loader.php(74): include()
+#1 /Users/lisahornung/Developer/Pelostop/pelostop2/wordpress/wp-blog-header.php(19): require_once('/Users/lisahorn...')
+#2 /Users/lisahornung/Developer/Pelostop/pelostop2/wordpress/index.php(17): require('/Users/lisahorn...')
+#3 {main}
+  thrown
+
+2018-08-12T11:20:13+00:00 CRITICAL Uncaught Error: Call to undefined function get_attributes() in /Users/lisahornung/Developer/Pelostop/pelostop2/wordpress/wp-content/themes/dt-the7/single-center.php:50
+Stack trace:
+#0 /Users/lisahornung/Developer/Pelostop/pelostop2/wordpress/wp-includes/template-loader.php(74): include()
+#1 /Users/lisahornung/Developer/Pelostop/pelostop2/wordpress/wp-blog-header.php(19): require_once('/Users/lisahorn...')
+#2 /Users/lisahornung/Developer/Pelostop/pelostop2/wordpress/index.php(17): require('/Users/lisahorn...')
+#3 {main}
+  thrown
+
+2018-08-12T11:28:43+00:00 CRITICAL Uncaught Error: Call to undefined function get_attributes() in /Users/lisahornung/Developer/Pelostop/pelostop2/wordpress/wp-content/themes/dt-the7/single-center.php:49
+Stack trace:
+#0 /Users/lisahornung/Developer/Pelostop/pelostop2/wordpress/wp-includes/template-loader.php(74): include()
+#1 /Users/lisahornung/Developer/Pelostop/pelostop2/wordpress/wp-blog-header.php(19): require_once('/Users/lisahorn...')
+#2 /Users/lisahornung/Developer/Pelostop/pelostop2/wordpress/index.php(17): require('/Users/lisahorn...')
+#3 {main}
+  thrown
+

@@ -405,6 +405,29 @@ function twentyfifteen_widget_tag_cloud_args( $args ) {
 add_filter( 'widget_tag_cloud_args', 'twentyfifteen_widget_tag_cloud_args' );
 
 
+
+// Our custom post type function
+function create_posttype() {
+
+    register_post_type( 'center',
+    // CPT Options
+        array(
+            'labels' => array(
+                'name' => __( 'Centers' ),
+                'singular_name' => __( 'Center' )
+            ),
+            'public' => true,
+            'has_archive' => true,
+            'rewrite' => array('slug' => 'center'),
+        )
+    );
+}
+// Hooking up our function to theme setup
+add_action( 'init', 'create_posttype' );
+
+
+
+
 /**
  * Implement the Custom Header feature.
  *
