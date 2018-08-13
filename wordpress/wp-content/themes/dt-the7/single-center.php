@@ -27,11 +27,13 @@ get_header( 'single' );
 			$this->title = $post->post_title;
 
 			foreach($this->fields as $field){
-				$this->$field = $post_meta[$field][0];
+				if (array_key_exists($field, $post_meta)) {
+					$this->$field = $post_meta[$field][0];
+				} else {
+					$this->$field = '';
+				}
 			}
 		}
-
-
 
 		public $title;
 
@@ -49,7 +51,6 @@ get_header( 'single' );
 
 	<?php get_template_part( 'header-main' ) ?>
 
-	<?php if ( presscore_is_content_visible() ): ?>
 
 		<?php do_action( 'presscore_before_loop' ) ?>
 
@@ -82,35 +83,9 @@ get_header( 'single' );
 				</li>
 			</ul>
 			</div>
-
-
-
-			<?php if ( post_password_required() ): ?>
-
-				<article id="post-<?php the_ID() ?>" <?php post_class() ?>
-
-					<?php
-					do_action( 'presscore_before_post_content' );
-
-					the_content();
-
-					do_action( 'presscore_after_post_content' );?>
-
-  ?>
-
-  <ul>
-    <li>
-      <?php print $center->title ?>
-    </li>
-  </ul>
-
-  <?php
-}
-// $args = array(
-//     'post_type' => 'center',
-
-// )
-
+ <?php
+endwhile;
+endif;
 
 get_footer();
 ?>

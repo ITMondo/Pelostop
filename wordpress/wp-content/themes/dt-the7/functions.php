@@ -412,6 +412,12 @@ function ___edit_form_field_term_meta_text( $term ) {
 // }
 */
 
+?>
+
+
+
+
+<?php
 
 // Helpers
 function dump($var) {
@@ -420,3 +426,4 @@ function dump($var) {
   var_dump($var);
   echo "</pre></div>";
 }
+?>
