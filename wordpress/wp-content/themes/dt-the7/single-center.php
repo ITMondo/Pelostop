@@ -11,21 +11,6 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-<<<<<<< HEAD
-get_header();
-
-while(have_posts()) {
-  the_post();
-
-  class Center {
-    function __construct($post) {
-      $this->title = $post->post_title;
-    }
-
-    public $title;
-  }
-  $center = new Center($post);
-=======
 get_header( 'single' );
 
 
@@ -108,7 +93,6 @@ get_header( 'single' );
 					the_content();
 
 					do_action( 'presscore_after_post_content' );?>
->>>>>>> 450cbe76a05d61addfda7aa70d2432cb0c1bd8b6
 
   ?>
 

@@ -1,4 +1,0 @@
-[2018-07-23 08:15:38.000000 173.0.81.1 173.0.81.1 - buscaClienteNIF ] {"user":"optimast","pass":"StOptima2017","nif":"47691091Q","nombre":"Lidia","apellidos":"Romero Carbelo","email":"Lydiaromerocarbelo@hotmail.com","comoconocio":"56","iddelegacion":"104","CP":"","tlf":"676663495","sexo":""}
-[2018-07-23 08:15:39.000000 173.0.81.1 173.0.81.1 - altaCompra ] {"user":"optimast","pass":"StOptima2017","id_cliente":"1000368267","id_articulo":"1582","unidades":1,"centro":"104","forma_pago":"14","tipo_descuento":"1","descuento_unitario":0,"tipoid":"1"}
-[2018-07-23 08:15:42.000000 173.0.81.1 173.0.81.1 - detalleVenta ] {"user":"optimast","pass":"StOptima2017","idVenta":"161657098","noperacion":14852,"ip":"173.0.81.1","ccupon":""}
-[2018-07-23 08:15:42.000000 173.0.81.1 173.0.81.1 - encuestaVenta ] {"user":"optimast","pass":"StOptima2017","idVenta":"161657098","CCNP":"56"}
