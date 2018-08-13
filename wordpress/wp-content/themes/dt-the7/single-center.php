@@ -11,6 +11,8 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
+include 'config.php';
+
 get_header( 'single' );
 
 
@@ -57,7 +59,7 @@ get_header( 'single' );
   				width="600"
   				height="450"
   				frameborder="0" style="border:0"
-  				src="https://www.google.com/maps/embed/v1/place?key=AIzaSyCYd8IA-EXnP5i9eUGf3WeIJpj3nOFuVVA&q=place_id:<?php echo $center->google_place_id; ?>" allowfullscreen>
+  				src="https://www.google.com/maps/embed/v1/place?key=<?php echo $config["google_api_key"]; ?>&q=place_id:<?php echo $center->google_place_id; ?>" allowfullscreen>
 			</iframe>
 
 			<div id="center_meta">
