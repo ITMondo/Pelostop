@@ -341,18 +341,38 @@ add_action( 'woocommerce_single_product_summary', 'my_custom_action', 30 );
 
 
 // bodypart selector, shortcodes
-function get_meta_from_product(){
-	$productID = 12;
-	$_product = wc_get_product($productID);
-	$product_name = $_product->get_name();
-	//$product_price_html = $_product->get_price_html();
-	return $product_name;
+function get_meta_from_product( $atts ){
+	$a = shortcode_atts( array(
+		'product_id' => '12',
+		'n'=> 'true'
+	), $atts );
 
-	//dump($product_name);
+	$productID = $a['product_id'];
+	$product = wc_get_product($productID);
+	// $product_price_range = $_product->get_price_html();
+
+	//$product_price_html = $_product->get_price_html();
+	//$product_array = array('product_name'=>$product_name, 'product_price_range'=>$product_price_range);
+
+
+	$info = <<<EOT
+	  <ul>
+		  <li>
+			  {$product->get_name()}
+			</li>
+			<li>
+			  {$product->get_price_html()}
+			</li>
+		</ul>
+EOT;
+
+  return $info;
+
+
+	// dump($product_name);
 }
 
 add_shortcode('bodypart', 'get_meta_from_product');
-add_action( 'woocommerce_init', 'get_meta_from_product');
 
 
 
