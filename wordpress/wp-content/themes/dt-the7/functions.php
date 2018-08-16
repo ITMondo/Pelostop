@@ -339,6 +339,23 @@ function my_custom_action() {
 add_action( 'woocommerce_single_product_summary', 'my_custom_action', 30 );
 
 
+
+// bodypart selector, shortcodes
+function get_meta_from_product(){
+	$productID = 12;
+	$_product = wc_get_product($productID);
+	$product_name = $_product->get_name();
+	//$product_price_html = $_product->get_price_html();
+	return $product_name;
+
+	//dump($product_name);
+}
+
+add_shortcode('bodypart', 'get_meta_from_product');
+add_action( 'woocommerce_init', 'get_meta_from_product');
+
+
+
 // CUSTOM WOOCOMMERCE TAXONOMY
 // $center_fields = array('center_latitude' => 'Latitud', 'center_longitude' => 'Longitud');
 
@@ -412,12 +429,12 @@ function ___edit_form_field_term_meta_text( $term ) {
 // }
 */
 
-?>
 
 
-
-
-<?php
+/*function shortcode_test(){
+	return 'yes worked';
+}
+add_shortcode('hurnnn', 'shortcode_test');   */
 
 // Helpers
 function dump($var) {
