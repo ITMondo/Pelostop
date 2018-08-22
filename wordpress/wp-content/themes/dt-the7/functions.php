@@ -29,9 +29,9 @@ require( trailingslashit( get_template_directory() ) . 'inc/init.php' );
 // add bootstrap
 function my_scripts() {
   wp_enqueue_style('bootstrap4', 'https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css');
-  wp_enqueue_style('pelostopCSS', get_template_directory_uri() . '/pelostop.css');
+  wp_enqueue_style('pelostopCSS', get_stylesheet_directory_uri() . '/pelostop.css');
   wp_enqueue_script( 'boot3', 'https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js', array( 'jquery' ),'',true );
-  wp_enqueue_script( 'googleMaps', 'https://maps.googleapis.com/maps/api/js?key=$config["google_apiapi_key"]&callback=initMap','','',true );
+  wp_enqueue_script( 'googleMaps', 'https://maps.googleapis.com/maps/api/js?key=AIzaSyCXnDF_tUhswlPkCJtVZqcfuqVZdiUQTgc&callback=initMap','','',true );
 }
 add_action( 'wp_enqueue_scripts', 'my_scripts' );
 
@@ -102,19 +102,19 @@ add_action( 'woocommerce_process_product_meta_variable', 'save_giftcard_option_f
 
 
 
-function create_post_type() {
-	  register_post_type( 'center',
-	                      array(
-	                          'labels' => array(
-	                              'name' => __( 'Centers' ),
-	                              'singular_name' => __( 'Center' )
-	                                            ),
-	                          'public' => true,
-                              'has_archive' => true
-                                )
-                          );
-}
-add_action( 'init', 'create_post_type' );
+// function create_post_type() {
+// 	  register_post_type( 'center',
+// 	                      array(
+// 	                          'labels' => array(
+// 	                              'name' => __( 'Centers' ),
+// 	                              'singular_name' => __( 'Center' )
+// 	                                            ),
+// 	                          'public' => true,
+//                               'has_archive' => true
+//                                 )
+//                           );
+// }
+// add_action( 'init', 'create_post_type' );
 		flush_rewrite_rules();
 
 $center_fields = array(
@@ -128,8 +128,6 @@ $center_fields = array(
 	array('id'=>'telephone','name'=>'Teléfono'),
 	array('id'=>'email','name'=>'Email'),
 	array('id'=>'opening_hours','name'=>'Horarios'),
-	array('id'=>'latitude','name'=>'Latitud'),
-	array('id'=>'longitude','name'=>'Longitud'),
 	array('id'=>'google_place_id','name' => 'Google Place ID'),
 	array('id'=>'group_company','name'=>'Grupo/Empresa'),
 	array('id'=>'paypal_available','name'=>'Paypal Disponible'),
@@ -146,7 +144,7 @@ function center_register_meta_fields() {
 add_action('init', 'center_register_meta_fields');
 
 function centers_meta_boxes() {
-  add_meta_box('centers-meta-box', 'Datos del Centro', 'centers_meta_box_callback', 'center', 'normal','high');
+  add_meta_box('centers-meta-box', 'Datos del Centro', 'centers_meta_box_callback', 'centro', 'normal','high');
 }
 add_action('add_meta_boxes', 'centers_meta_boxes' );
 
@@ -175,7 +173,7 @@ function save_center_term( $new_status, $old_status, $post ) {
     $term_id = get_post_meta($post->ID, 'center_id', true);
     $term_exists = !empty($term_id);
 
-    if ( $post->post_type === 'center' ) {
+    if ( $post->post_type === 'centro' ) {
       if ($new_status === 'publish') {
         if ( !$term_exists ) {
           $center_id = wp_insert_term($post->post_title, 'pa_centers', array( 'slug' => 'center_'.$post->ID))['term_id'];
@@ -255,8 +253,8 @@ function my_custom_action() {
 		$queried_centers = $wpdb->get_results($querystr, ARRAY_N);
 
 		foreach($queried_centers as $center) {
-			if ($center[0] === 'latitude') $latitude = $center[1];
-			if ($center[0] === 'longitude') $longitude = $center[1];
+			if ($center[0] === 'codespacing_progress_map_lat') $latitude = $center[1];
+			if ($center[0] === 'codespacing_progress_map_lng') $longitude = $center[1];
 		}
 
       $xCenter = array(
@@ -296,7 +294,6 @@ function my_custom_action() {
           <script>
             function initMap() {
               var centers = <?php echo $centers_json . ";"; ?>
-              console.log(centers);
               var map = new google.maps.Map(
                   document.getElementById('map'), {zoom: 14, center: { lat: 41.390205, lng: 2.154007 }}
               );
@@ -343,8 +340,7 @@ add_action( 'woocommerce_single_product_summary', 'my_custom_action', 30 );
 // bodypart selector, shortcodes
 function get_meta_from_product( $atts ){
 	$a = shortcode_atts( array(
-		'product_id' => '12',
-		'n'=> 'true'
+		'product_id' => '15077'
 	), $atts );
 
 	$productID = $a['product_id'];
