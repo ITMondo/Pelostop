@@ -319,7 +319,9 @@ for ( center of centers ) {
 '<p>Price: '+center.price_html+' </p>'+
 '<p>'+center.product_short_description+' </p>'+
 '<p>'+center.product_image+'</p>'+
+'<button style="font-size: 30px; margin-bottom: 50px;">'+
 '<a href="'+center.add_to_cart_url+'">'+center.add_to_cart_text+'</a>'+
+'</button>'+
 '</div>'+
 '</div>';
 //
@@ -344,7 +346,7 @@ foreach ($tipo_pack_array as $tipo_pack_type => $value) {
 	?>
 
 			<!-- Button trigger modal -->
-			<div>
+			<div> <?php echo $tipo_pack_type;?>
 			<?php echo $value['minPrice'];?>
 			</div>
 			<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#<?php echo $tipo_pack_type; ?>">
