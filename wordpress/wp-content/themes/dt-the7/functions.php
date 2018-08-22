@@ -31,7 +31,7 @@ function my_scripts() {
   wp_enqueue_style('bootstrap4', 'https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css');
   wp_enqueue_style('pelostopCSS', get_stylesheet_directory_uri() . '/pelostop.css');
   wp_enqueue_script( 'boot3', 'https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js', array( 'jquery' ),'',true );
-  wp_enqueue_script( 'googleMaps', 'https://maps.googleapis.com/maps/api/js?key=&callback=initMap','','',true );
+  wp_enqueue_script( 'googleMaps', 'https://maps.googleapis.com/maps/api/js?key=AIzaSyCXnDF_tUhswlPkCJtVZqcfuqVZdiUQTgc&callback=initMap','','',true );
 }
 add_action( 'wp_enqueue_scripts', 'my_scripts' );
 
@@ -118,8 +118,8 @@ add_action( 'woocommerce_process_product_meta_variable', 'save_giftcard_option_f
 		flush_rewrite_rules();
 
 $center_fields = array(
-	array('id'=>'latitude','name'=>'latitude'), // del
-	array('id'=>'longitude','name'=>'longitude'), // del
+	// array('id'=>'latitude','name'=>'latitude'), // del
+	// array('id'=>'longitude','name'=>'longitude'), // del
 	array('id'=>'web_name','name'=>'Nombre Web'),
 	array('id'=>'street','name'=>'Calle'),
   array('id'=>'number','name'=>'Número'),
@@ -247,8 +247,19 @@ function my_custom_action() {
 		$center_id = substr($product_variation->get_variation_attributes()['attribute_pa_centers'], 7);
 		$tipo_pack_type = $product_variation->get_variation_attributes()['attribute_pa_tipo-pack'];
 
-		//if ($bono === 'bono3sesiones') $bono_array[2] = $bono;
-		//dump($bono_array);
+
+    if( !isset($tipo_pack_array[$tipo_pack_type]['minPrice']) ) {
+			$tipo_pack_array[$tipo_pack_type]['minPrice'] = $product_variation->get_price_html();
+		}
+		if ( $tipo_pack_array[$tipo_pack_type]['minPrice'] > $product_variation->get_price_html() ) {
+			    $tipo_pack_array[$tipo_pack_type]['minPrice'] = $product_variation->get_price_html();
+		}
+		if( !isset($tipo_pack_array[$tipo_pack_type]['maxPrice']) ) {
+			$tipo_pack_array[$tipo_pack_type]['maxPrice'] = $product_variation->get_price_html();
+		}
+		if ( $tipo_pack_array[$tipo_pack_type]['maxPrice'] > $product_variation->get_price_html() ) {
+			    $tipo_pack_array[$tipo_pack_type]['maxPrice'] = $product_variation->get_price_html();
+		}
 
 		$querystr = "
 		  SELECT wp_postmeta.meta_key, wp_postmeta.meta_value, wp_posts.post_title
@@ -269,7 +280,7 @@ function my_custom_action() {
 					'add_to_cart_url' => $product_variation->add_to_cart_url(),
 					'add_to_cart_text' => $product_variation->add_to_cart_text(),
 					'center_title' => $center[2],
-					'price_html' =>  $product_variation ->get_price_html(),
+					'price_html' =>  $product_variation->get_price_html(),
 					'product_title' => $product->get_title(),
 					'product_short_description' => $product->get_short_description(),
 					'product_image' => $product->get_image()
@@ -278,6 +289,8 @@ function my_custom_action() {
 				$tipo_pack_array[$tipo_pack_type]['centers'] = array();
 			}
       array_push($tipo_pack_array[$tipo_pack_type]['centers'], $xCenter);
+
+
   }
 
 ?>
@@ -331,6 +344,9 @@ foreach ($tipo_pack_array as $tipo_pack_type => $value) {
 	?>
 
 			<!-- Button trigger modal -->
+			<div>
+			<?php echo $value['minPrice'];?>
+			</div>
 			<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#<?php echo $tipo_pack_type; ?>">
 				Select center (add to cart)
 			</button>
@@ -386,13 +402,12 @@ function get_meta_from_product( $atts ){
 			  {$product->get_name()}
 			</li>
 			<li>
-
 			  {$product->get_price_html()}
 			</li>
 		</ul>
 		<button class="bodySelectorButton">
-		<a href="<?php echo $product->get_permalink(); ?>">
-	hurn
+		<a href="{$product->get_permalink()}">
+	Ver producto
 		</a>
 		</button>
 EOT;
