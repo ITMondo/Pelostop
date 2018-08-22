@@ -31,7 +31,7 @@ function my_scripts() {
   wp_enqueue_style('bootstrap4', 'https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css');
   wp_enqueue_style('pelostopCSS', get_stylesheet_directory_uri() . '/pelostop.css');
   wp_enqueue_script( 'boot3', 'https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js', array( 'jquery' ),'',true );
-  wp_enqueue_script( 'googleMaps', 'https://maps.googleapis.com/maps/api/js?key=&callback=initMap','','',true );
+  wp_enqueue_script( 'googleMaps', 'https://maps.googleapis.com/maps/api/js?key=AIzaSyCXnDF_tUhswlPkCJtVZqcfuqVZdiUQTgc&callback=initMap','','',true );
 }
 add_action( 'wp_enqueue_scripts', 'my_scripts' );
 
@@ -118,6 +118,8 @@ add_action( 'woocommerce_process_product_meta_variable', 'save_giftcard_option_f
 		flush_rewrite_rules();
 
 $center_fields = array(
+	//array('id'=>'latitude','name'=>'latitude'), // del
+	//array('id'=>'longitude','name'=>'longitude'), // del
 	array('id'=>'web_name','name'=>'Nombre Web'),
 	array('id'=>'street','name'=>'Calle'),
   array('id'=>'number','name'=>'Número'),
@@ -144,7 +146,7 @@ function center_register_meta_fields() {
 add_action('init', 'center_register_meta_fields');
 
 function centers_meta_boxes() {
-  add_meta_box('centers-meta-box', 'Datos del Centro', 'centers_meta_box_callback', 'centro', 'normal','high');
+  add_meta_box('centers-meta-box', 'Datos del Centro', 'centers_meta_box_callback', 'centro', 'normal','high'); // center -> centro
 }
 add_action('add_meta_boxes', 'centers_meta_boxes' );
 
@@ -173,7 +175,7 @@ function save_center_term( $new_status, $old_status, $post ) {
     $term_id = get_post_meta($post->ID, 'center_id', true);
     $term_exists = !empty($term_id);
 
-    if ( $post->post_type === 'centro' ) {
+    if ( $post->post_type === 'centro' ) {  // center -> centro
       if ($new_status === 'publish') {
         if ( !$term_exists ) {
           $center_id = wp_insert_term($post->post_title, 'pa_centers', array( 'slug' => 'center_'.$post->ID))['term_id'];
@@ -238,11 +240,14 @@ function my_custom_action() {
   // ";
   // $raw_centers = $wpdb->get_results($querystr, ARRAY_N);
 
+  $tipo_pack_array = array();
 
-  $centers = array();
   foreach ($product_variation_ids as $variation_id) {
 		$product_variation = new WC_Product_Variation( $variation_id );
 		$center_id = substr($product_variation->get_variation_attributes()['attribute_pa_centers'], 7);
+		$tipo_pack_type = $product_variation->get_variation_attributes()['attribute_pa_tipo-pack'];
+		//if ($bono === 'bono3sesiones') $bono_array[2] = $bono;
+		//dump($bono_array);
 
 		$querystr = "
 		  SELECT wp_postmeta.meta_key, wp_postmeta.meta_value, wp_posts.post_title
@@ -253,8 +258,8 @@ function my_custom_action() {
 		$queried_centers = $wpdb->get_results($querystr, ARRAY_N);
 
 		foreach($queried_centers as $center) {
-			if ($center[0] === 'codespacing_progress_map_lat') $latitude = $center[1];
-			if ($center[0] === 'codespacing_progress_map_lng') $longitude = $center[1];
+			if ($center[0] === 'codespacing_progress_map_lat') $latitude = $center[1];    //latitude -> codespacing_progress_map_lat
+			if ($center[0] === 'codespacing_progress_map_lng') $longitude = $center[1];   										//longitude -> codespacing_progress_map_lng
 		}
 
       $xCenter = array(
@@ -268,70 +273,92 @@ function my_custom_action() {
 					'product_short_description' => $product->get_short_description(),
 					'product_image' => $product->get_image()
                        );
-      array_push($centers, $xCenter);
+      if(!isset($tipo_pack_array[$tipo_pack_type]['centers'])) {
+				$tipo_pack_array[$tipo_pack_type]['centers'] = array();
+			}
+      array_push($tipo_pack_array[$tipo_pack_type]['centers'], $xCenter);
   }
 
-  $centers_json = json_encode($centers);
+?>
+  <script>
+	  function initMap() {
 
-  ?>
-  <!-- Button trigger modal -->
-  <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
-    Select center (add to cart)
-  </button>
+<?php
+  // javascript
+  foreach ($tipo_pack_array as $tipo_pack_type => $value) {
+			$centers = $value['centers'];
+			$centers_json = json_encode($centers);
+?>
+var centers = <?php echo $centers_json . ";"; ?>
+var map = new google.maps.Map(
+		document.getElementById('<?php echo $tipo_pack_type; ?>-map'), {zoom: 14, center: { lat: 41.390205, lng: 2.154007 }}
+);
+var infowindow = new google.maps.InfoWindow()
+for ( center of centers ) {
+	const position = { lat: parseFloat(center.latitude), lng: parseFloat(center.longitude) };
+	const content = '<div id="content">'+
+'<div id="siteNotice">'+
+'</div>'+
+'<h3 id="firstHeading" class="firstHeading"> '+center.center_title+' </h3>'+
+'<div id="bodyContent">'+
+'<p>'+center.product_title+'</p>'+
+'<p>Price: '+center.price_html+' </p>'+
+'<p>'+center.product_short_description+' </p>'+
+'<p>'+center.product_image+'</p>'+
+'<a href="'+center.add_to_cart_url+'">'+center.add_to_cart_text+'</a>'+
+'</div>'+
+'</div>';
+//
+	const marker = new google.maps.Marker({ position, map: map, title: center.center_title });
+	google.maps.event.addListener(marker,'click', (function(marker,content,infowindow){
+		return function() {
+			infowindow.setContent(content);
+			infowindow.open(map,marker);
+		};
+	})(marker,content,infowindow));
+}
 
-  <!-- Modal -->
-  <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-xl modal-dialog-centered" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
-        <div class="modal-body">
-          <div id="map" style="width: 100%; height: 70vh;"></div>
-          <script>
-            function initMap() {
-              var centers = <?php echo $centers_json . ";"; ?>
-              var map = new google.maps.Map(
-                  document.getElementById('map'), {zoom: 14, center: { lat: 41.390205, lng: 2.154007 }}
-              );
-              var infowindow = new google.maps.InfoWindow()
-              for ( center of centers ) {
-                const position = { lat: parseFloat(center.latitude), lng: parseFloat(center.longitude) };
-                const content = '<div id="content">'+
-            '<div id="siteNotice">'+
-            '</div>'+
-            '<h3 id="firstHeading" class="firstHeading"> '+center.center_title+' </h3>'+
-            '<div id="bodyContent">'+
-            '<p>'+center.product_title+'</p>'+
-						'<p>Price: '+center.price_html+' </p>'+
-						'<p>'+center.product_short_description+' </p>'+
-						'<p>'+center.product_image+'</p>'+
-						'<a href="'+center.add_to_cart_url+'">'+center.add_to_cart_text+'</a>'+
-            '</div>'+
-            '</div>';
-						//
-                const marker = new google.maps.Marker({ position, map: map, title: center.center_title });
-                google.maps.event.addListener(marker,'click', (function(marker,content,infowindow){
-                  return function() {
-                    infowindow.setContent(content);
-                    infowindow.open(map,marker);
-                  };
-                })(marker,content,infowindow));
-              }
-            }
-          </script>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-          <button type="button" class="btn btn-primary">Save changes</button>
-        </div>
-      </div>
-    </div>
-  </div>
-  <?php
+<?php
+}
+?>
+  }
+  </script>
+
+<?php
+// Buttons and modals
+foreach ($tipo_pack_array as $tipo_pack_type => $value) {
+	?>
+
+			<!-- Button trigger modal -->
+			<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#<?php echo $tipo_pack_type; ?>">
+				Select center (add to cart)
+			</button>
+
+			<!-- Modal -->
+			<div class="modal fade" id="<?php echo $tipo_pack_type; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+				<div class="modal-dialog modal-xl modal-dialog-centered" role="document">
+					<div class="modal-content">
+						<div class="modal-header">
+							<h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+							<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+								<span aria-hidden="true">&times;</span>
+							</button>
+						</div>
+						<div class="modal-body">
+							<div id="<?php echo $tipo_pack_type; ?>-map" style="width: 100%; height: 70vh;"></div>
+
+						</div>
+						<div class="modal-footer">
+							<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+							<button type="button" class="btn btn-primary">Save changes</button>
+						</div>
+					</div>
+				</div>
+			</div>
+
+<?php
+}
+
 };
 add_action( 'woocommerce_single_product_summary', 'my_custom_action', 30 );
 
