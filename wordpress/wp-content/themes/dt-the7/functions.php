@@ -31,7 +31,7 @@ function my_scripts() {
   wp_enqueue_style('bootstrap4', 'https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css');
   wp_enqueue_style('pelostopCSS', get_stylesheet_directory_uri() . '/pelostop.css');
   wp_enqueue_script( 'boot3', 'https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js', array( 'jquery' ),'',true );
-  wp_enqueue_script( 'googleMaps', 'https://maps.googleapis.com/maps/api/js?key=&callback=initMap','','',true );
+  wp_enqueue_script( 'googleMaps', 'https://maps.googleapis.com/maps/api/js?key=AIzaSyCXnDF_tUhswlPkCJtVZqcfuqVZdiUQTgc&callback=initMap','','',true );
 }
 add_action( 'wp_enqueue_scripts', 'my_scripts' );
 
@@ -102,24 +102,24 @@ add_action( 'woocommerce_process_product_meta_variable', 'save_giftcard_option_f
 
 
 
-// function create_post_type() {
-// 	  register_post_type( 'center',
-// 	                      array(
-// 	                          'labels' => array(
-// 	                              'name' => __( 'Centers' ),
-// 	                              'singular_name' => __( 'Center' )
-// 	                                            ),
-// 	                          'public' => true,
-//                               'has_archive' => true
-//                                 )
-//                           );
-// }
-// add_action( 'init', 'create_post_type' );
+function create_post_type() {
+	  register_post_type( 'center',
+	                      array(
+	                          'labels' => array(
+	                              'name' => __( 'Centers' ),
+	                              'singular_name' => __( 'Center' )
+	                                            ),
+	                          'public' => true,
+                              'has_archive' => true
+                                )
+                          );
+}
+add_action( 'init', 'create_post_type' );
 		flush_rewrite_rules();
 
 $center_fields = array(
-	//array('id'=>'latitude','name'=>'latitude'), // del
-	//array('id'=>'longitude','name'=>'longitude'), // del
+	array('id'=>'latitude','name'=>'latitude'), // del
+	array('id'=>'longitude','name'=>'longitude'), // del
 	array('id'=>'web_name','name'=>'Nombre Web'),
 	array('id'=>'street','name'=>'Calle'),
   array('id'=>'number','name'=>'Número'),
@@ -146,7 +146,7 @@ function center_register_meta_fields() {
 add_action('init', 'center_register_meta_fields');
 
 function centers_meta_boxes() {
-  add_meta_box('centers-meta-box', 'Datos del Centro', 'centers_meta_box_callback', 'centro', 'normal','high'); // center -> centro
+  add_meta_box('centers-meta-box', 'Datos del Centro', 'centers_meta_box_callback', 'center', 'normal','high'); // center -> centro
 }
 add_action('add_meta_boxes', 'centers_meta_boxes' );
 
@@ -175,7 +175,7 @@ function save_center_term( $new_status, $old_status, $post ) {
     $term_id = get_post_meta($post->ID, 'center_id', true);
     $term_exists = !empty($term_id);
 
-    if ( $post->post_type === 'centro' ) {  // center -> centro
+    if ( $post->post_type === 'center' ) {  // center -> centro
       if ($new_status === 'publish') {
         if ( !$term_exists ) {
           $center_id = wp_insert_term($post->post_title, 'pa_centers', array( 'slug' => 'center_'.$post->ID))['term_id'];
@@ -246,6 +246,7 @@ function my_custom_action() {
 		$product_variation = new WC_Product_Variation( $variation_id );
 		$center_id = substr($product_variation->get_variation_attributes()['attribute_pa_centers'], 7);
 		$tipo_pack_type = $product_variation->get_variation_attributes()['attribute_pa_tipo-pack'];
+
 		//if ($bono === 'bono3sesiones') $bono_array[2] = $bono;
 		//dump($bono_array);
 
@@ -258,8 +259,8 @@ function my_custom_action() {
 		$queried_centers = $wpdb->get_results($querystr, ARRAY_N);
 
 		foreach($queried_centers as $center) {
-			if ($center[0] === 'codespacing_progress_map_lat') $latitude = $center[1];    //latitude -> codespacing_progress_map_lat
-			if ($center[0] === 'codespacing_progress_map_lng') $longitude = $center[1];   										//longitude -> codespacing_progress_map_lng
+			if ($center[0] === 'latitude') $latitude = $center[1];    //latitude -> codespacing_progress_map_lat
+			if ($center[0] === 'longitude') $longitude = $center[1]; 	//longitude -> codespacing_progress_map_lng
 		}
 
       $xCenter = array(
@@ -372,6 +373,7 @@ function get_meta_from_product( $atts ){
 
 	$productID = $a['product_id'];
 	$product = wc_get_product($productID);
+
 	// $product_price_range = $_product->get_price_html();
 
 	//$product_price_html = $_product->get_price_html();
@@ -384,16 +386,22 @@ function get_meta_from_product( $atts ){
 			  {$product->get_name()}
 			</li>
 			<li>
+
 			  {$product->get_price_html()}
 			</li>
 		</ul>
+		<button class="bodySelectorButton">
+		<a href="<?php echo $product->get_permalink(); ?>">
+	hurn
+		</a>
+		</button>
 EOT;
 
   return $info;
-
-
-	// dump($product_name);
 }
+
+
+
 
 add_shortcode('bodypart', 'get_meta_from_product');
 
@@ -470,7 +478,7 @@ function ___edit_form_field_term_meta_text( $term ) {
 //       update_term_meta( $term_id, $field, $new_value );
 //   }
 // }
-*/
+
 
 
 
